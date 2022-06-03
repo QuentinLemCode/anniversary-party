@@ -1,13 +1,20 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { Music } from '../interfaces/music';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MusicApiService {
 
-  constructor() { }
 
-  search(keywords: string) {
-    
+  private readonly endpoint = environment.serverUrl + 'music'
+
+  constructor(private http: HttpClient) { }
+
+  search(query: string): Observable<Music[]> {
+    return this.http.post<Music[]>(this.endpoint + '/search', {query})
   }
 }
