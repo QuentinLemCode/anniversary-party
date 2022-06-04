@@ -4,6 +4,9 @@ on:
     branches: [main, develop]
   workflow_dispatch: 
 
+env:
+  SERVER_URL: ${{ secrets.SERVER_URL }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
