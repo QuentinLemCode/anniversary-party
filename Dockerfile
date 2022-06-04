@@ -23,6 +23,6 @@ FROM arm32v6/nginx:alpine
 
 # Copy the build output to replace the default nginx contents.
 COPY --from=build /usr/local/app/dist/party-anniversary /usr/share/nginx/html
-
+COPY nginx.conf /etc/nginx/nginx.conf
 # Expose port 80
 EXPOSE 80
