@@ -1,5 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MusicManagerComponent } from './music-manager.component';
 
@@ -10,7 +11,7 @@ describe('MusicManagerComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ MusicManagerComponent ],
-      imports: [ HttpClientTestingModule ]
+      imports: [ HttpClientTestingModule, ReactiveFormsModule, FormsModule ]
     })
     .compileComponents();
   });
