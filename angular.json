@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "anniversary-party": {
+    "party-anniversary": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/anniversary-party",
+            "outputPath": "dist/party-anniversary",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "anniversary-party:build:production"
+              "browserTarget": "party-anniversary:build:production"
             },
             "development": {
-              "browserTarget": "anniversary-party:build:development"
+              "browserTarget": "party-anniversary:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "anniversary-party:build"
+            "browserTarget": "party-anniversary:build"
           }
         },
         "test": {
