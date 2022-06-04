@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MusicApiService } from '../services/music-api.service';
 import { catchError, debounceTime, distinctUntilChanged, filter, finalize, mergeMap, takeUntil, tap } from 'rxjs/operators';
-import { Unsubscribable } from '../utils/unsubscribable-component';
+import { UnsubscribableComponent } from '../utils/unsubscribable-component';
 import { Music } from '../interfaces/music';
 import { of } from 'rxjs';
 
@@ -11,7 +11,7 @@ import { of } from 'rxjs';
   templateUrl: './music-manager.component.html',
   styleUrls: ['./music-manager.component.scss']
 })
-export class MusicManagerComponent extends Unsubscribable implements OnInit {
+export class MusicManagerComponent extends UnsubscribableComponent implements OnInit {
 
   search = new FormControl<string>('')
   results: Music[] | null = null
