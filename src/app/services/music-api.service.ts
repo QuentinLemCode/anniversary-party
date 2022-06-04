@@ -17,4 +17,10 @@ export class MusicApiService {
   search(query: string): Observable<Music[]> {
     return this.http.get<Music[]>(this.endpoint + '/search', {params: {query}})
   }
+
+  getUrlLogin(): Observable<string> {
+    return this.http.get(this.endpoint + '/spotify-login', {
+      responseType: 'text'
+    });
+  }
 }

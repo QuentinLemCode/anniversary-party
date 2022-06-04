@@ -5,11 +5,15 @@ import { AppComponent } from './app.component';
 import { MusicManagerComponent } from './music-manager/music-manager.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SpotifyDeviceComponent } from './admin/spotify-device/spotify-device.component';
+import { SpotifyAuthComponent } from './admin/spotify-auth/spotify-auth.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MusicManagerComponent,
+    SpotifyDeviceComponent,
+    SpotifyAuthComponent,
   ],
   imports: [
     BrowserModule,
