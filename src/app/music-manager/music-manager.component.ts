@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MusicApiService } from '../services/music-api.service';
-import { debounceTime, distinctUntilChanged, filter, finalize, mergeMap, takeUntil, tap } from 'rxjs/operators';
+import { catchError, debounceTime, distinctUntilChanged, filter, finalize, mergeMap, takeUntil, tap } from 'rxjs/operators';
 import { Unsubscribable } from '../utils/unsubscribable-component';
 import { Music } from '../interfaces/music';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-music-manager',
@@ -15,9 +16,10 @@ export class MusicManagerComponent extends Unsubscribable implements OnInit {
   search = new FormControl<string>('')
   results: Music[] | null = null
   loading = false
+  error = false
 
   constructor(private music: MusicApiService) {
-    super();
+    super();  
   }
 
   ngOnInit(): void {
@@ -28,7 +30,14 @@ export class MusicManagerComponent extends Unsubscribable implements OnInit {
       debounceTime(300),
       tap(() => this.loading = true),
       finalize(() => this.loading = false),
-      mergeMap(query => this.music.search(query))
+      mergeMap(query => this.music.search(query).pipe(
+        tap(() => this.error = false),
+        catchError(() => {
+          this.error = true;
+          this.loading = false;
+          return of([]);
+        })
+      ))
     ).subscribe({
       next: results => this.results = results
     })
