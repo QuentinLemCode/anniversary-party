@@ -24,6 +24,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Replace env variable in environment file
+        run: node replace_env.js
+
       - name: Install npm dependencies
         run: npm ci
       
