@@ -11,9 +11,8 @@ export class SpotifyAuthComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe({
-      next: (p) => console.log(p)
-    });
+    const code = this.route.snapshot.queryParamMap.get('code');
+    const state = this.route.snapshot.queryParamMap.get('state');
   }
 
 }
