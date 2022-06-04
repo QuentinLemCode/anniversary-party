@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { MusicApiService } from '../../services/music-api.service';
 
 @Component({
@@ -10,8 +9,7 @@ import { MusicApiService } from '../../services/music-api.service';
 export class SpotifyDeviceComponent implements OnInit {
 
   constructor(
-    private music: MusicApiService,
-    private router: Router
+    private music: MusicApiService
     ) { }
 
   ngOnInit(): void {

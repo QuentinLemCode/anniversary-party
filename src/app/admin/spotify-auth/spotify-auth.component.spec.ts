@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
 
 import { SpotifyAuthComponent } from './spotify-auth.component';
 
@@ -8,7 +9,17 @@ describe('SpotifyAuthComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SpotifyAuthComponent ]
+      declarations: [ SpotifyAuthComponent ],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              queryParamMap: new URLSearchParams()
+            }
+          }
+        }
+      ]
     })
     .compileComponents();
 
