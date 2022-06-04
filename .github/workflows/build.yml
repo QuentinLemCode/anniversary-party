@@ -27,9 +27,6 @@ jobs:
 
       - name: Install npm dependencies
         run: npm ci
-
-      - name: Replace env variable in environment file
-        run: npm run replace-env
       
       - name: Lint code
         run: npm run lint

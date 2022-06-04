@@ -8,8 +8,7 @@
     "lint": "ng lint",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "test-ci": "ng test --watch=false --browsers=ChromeHeadlessCI",
-    "replace-env": "node replace_env.js"
+    "test-ci": "ng test --watch=false --browsers=ChromeHeadlessCI"
   },
   "private": true,
   "dependencies": {
