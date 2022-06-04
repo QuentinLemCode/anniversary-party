@@ -15,6 +15,6 @@ export class MusicApiService {
   constructor(private http: HttpClient) { }
 
   search(query: string): Observable<Music[]> {
-    return this.http.post<Music[]>(this.endpoint + '/search', {query})
+    return this.http.get<Music[]>(this.endpoint + '/search', {params: {query}})
   }
 }
