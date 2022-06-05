@@ -8,8 +8,6 @@ import { Music } from '../interfaces/music';
   providedIn: 'root'
 })
 export class MusicApiService {
-
-
   private readonly endpoint = environment.serverUrl + 'music'
 
   constructor(private http: HttpClient) { }
