@@ -4,12 +4,13 @@ import { SpotifyAuthComponent } from './admin/spotify-auth/spotify-auth.componen
 import { SpotifyDeviceComponent } from './admin/spotify-device/spotify-device.component';
 import { MusicManagerComponent } from './music-manager/music-manager.component';
 import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
-  {path: 'admin/spotify-auth', component: SpotifyAuthComponent},
-  {path: 'admin/spotify-device', component: SpotifyDeviceComponent},
+  {path: 'admin/spotify-auth', component: SpotifyAuthComponent, canActivate: [AuthGuard]},
+  {path: 'admin/spotify-device', component: SpotifyDeviceComponent, canActivate: [AuthGuard]},
   {path: 'register', component: LoginComponent},
-  {path: 'music-manager', component: MusicManagerComponent}
+  {path: 'music-manager', component: MusicManagerComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
