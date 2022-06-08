@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from './services/user.service';
 
 @Component({
@@ -7,7 +8,11 @@ import { UserService } from './services/user.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private user: UserService) {}
+  constructor(private user: UserService, router: Router) {
+    if(this.user.isLoggedIn === false) {
+      router.navigate(['login']);
+    }
+  }
 
   get
   isLoggedIn() {

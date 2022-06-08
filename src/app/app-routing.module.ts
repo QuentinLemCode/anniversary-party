@@ -9,7 +9,7 @@ import { AuthGuard } from './shared/auth.guard';
 const routes: Routes = [
   {path: 'admin/spotify-auth', component: SpotifyAuthComponent, canActivate: [AuthGuard]},
   {path: 'admin/spotify-device', component: SpotifyDeviceComponent, canActivate: [AuthGuard]},
-  {path: 'register', component: LoginComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'music-manager', component: MusicManagerComponent, canActivate: [AuthGuard]}
 ];
 
