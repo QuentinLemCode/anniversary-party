@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 })
 export class UserService {
 
-  private endpoint = environment.serverUrl + 'user'
+  private endpoint = environment.serverUrl + 'users'
 
   constructor(private http: HttpClient) { }
 
