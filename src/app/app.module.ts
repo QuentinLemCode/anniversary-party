@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SpotifyDeviceComponent } from './admin/spotify-device/spotify-device.component';
 import { SpotifyAuthComponent } from './admin/spotify-auth/spotify-auth.component';
-import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,7 @@ import { RegisterComponent } from './register/register.component';
     MusicManagerComponent,
     SpotifyDeviceComponent,
     SpotifyAuthComponent,
-    RegisterComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

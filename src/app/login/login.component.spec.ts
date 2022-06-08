@@ -1,15 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserService } from '../services/user.service';
-import { RegisterComponent } from './register.component';
+import { LoginComponent } from './login.component';
 import { EMPTY } from 'rxjs';
 
-describe('RegisterComponent', () => {
-  let component: RegisterComponent;
-  let fixture: ComponentFixture<RegisterComponent>;
+describe('LoginComponent', () => {
+  let component: LoginComponent;
+  let fixture: ComponentFixture<LoginComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RegisterComponent ],
+      declarations: [ LoginComponent ],
       providers: [
         {
           provide: UserService,
@@ -21,7 +21,7 @@ describe('RegisterComponent', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RegisterComponent);
+    fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
