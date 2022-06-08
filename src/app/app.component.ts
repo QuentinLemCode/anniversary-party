@@ -18,4 +18,13 @@ export class AppComponent {
   isLoggedIn() {
     return this.user.isLoggedIn;
   }
+
+  get
+  username() {
+    return this.user.username;
+  }
+
+  logout() {
+    this.user.logout();
+  }
 }

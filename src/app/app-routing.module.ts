@@ -5,11 +5,12 @@ import { SpotifyDeviceComponent } from './admin/spotify-device/spotify-device.co
 import { MusicManagerComponent } from './music-manager/music-manager.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './shared/auth.guard';
+import { NotAuthGuard } from './shared/not-auth.guard';
 
 const routes: Routes = [
   {path: 'admin/spotify-auth', component: SpotifyAuthComponent, canActivate: [AuthGuard]},
   {path: 'admin/spotify-device', component: SpotifyDeviceComponent, canActivate: [AuthGuard]},
-  {path: 'login', component: LoginComponent},
+  {path: 'login', component: LoginComponent, canActivate: [NotAuthGuard]},
   {path: 'music-manager', component: MusicManagerComponent, canActivate: [AuthGuard]}
 ];
 
