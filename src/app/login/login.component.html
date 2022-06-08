@@ -1,4 +1,13 @@
-<div>
-  <label>Votre nom<input [formControl]="nameControl" type="text"/></label>
-  <button (click)="submit()">Envoyer</button>
-</div>
+<form [formGroup]="form">
+  <fieldset>
+      <legend>Se connecter</legend>
+      <div class="form-field">
+          <label>Ton prénom :</label>
+          <input name="email" formControlName="name">
+      </div>
+  </fieldset>
+  <div class="form-buttons">
+      <button class="button button-primary"
+              (click)="login()">Login</button>
+  </div>
+</form>
