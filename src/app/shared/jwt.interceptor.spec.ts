@@ -1,11 +1,18 @@
 import { TestBed } from '@angular/core/testing';
+import { UserService } from '../services/user.service';
 
 import { JwtInterceptor } from './jwt.interceptor';
 
 describe('JwtInterceptor', () => {
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
-      JwtInterceptor
+      JwtInterceptor,
+      {
+        provide: UserService,
+        useValue: {
+          getToken: () => '123'
+        }
+      }
       ]
   }));
 
