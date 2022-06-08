@@ -3,6 +3,7 @@ import { UserService } from '../services/user.service';
 import { LoginComponent } from './login.component';
 import { EMPTY } from 'rxjs';
 import { Router } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -24,7 +25,8 @@ describe('LoginComponent', () => {
             navigate: () => {}
           }
         }
-      ]
+      ],
+      imports: [FormsModule, ReactiveFormsModule]
     })
     .compileComponents();
 
