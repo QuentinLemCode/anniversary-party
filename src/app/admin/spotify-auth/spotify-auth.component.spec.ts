@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
+import { EMPTY } from 'rxjs';
+import { MusicApiService } from '../../services/music-api.service';
 
 import { SpotifyAuthComponent } from './spotify-auth.component';
 
@@ -17,6 +19,12 @@ describe('SpotifyAuthComponent', () => {
             snapshot: {
               queryParamMap: new URLSearchParams()
             }
+          }
+        },
+        {
+          provide: MusicApiService,
+          useValue: {
+            authenticatePlayer: () => EMPTY
           }
         }
       ]
