@@ -8,9 +8,9 @@ import { UserService } from './services/user.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private user: UserService, router: Router) {
+  constructor(private user: UserService, private router: Router) {
     if(this.user.isLoggedIn === false) {
-      router.navigate(['login']);
+      this.router.navigate(['login']);
     }
   }
 
@@ -28,5 +28,6 @@ export class AppComponent {
 
   logout() {
     this.user.logout();
+    this.router.navigate(['/login'], {replaceUrl: true})
   }
 }

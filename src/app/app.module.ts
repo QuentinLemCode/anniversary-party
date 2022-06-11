@@ -9,6 +9,8 @@ import { SpotifyDeviceComponent } from './admin/spotify-device/spotify-device.co
 import { SpotifyAuthComponent } from './admin/spotify-auth/spotify-auth.component';
 import { LoginComponent } from './login/login.component';
 import { JwtInterceptor } from './shared/jwt.interceptor';
+import { NotFoundComponent } from './shared/not-found/not-found.component';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { JwtInterceptor } from './shared/jwt.interceptor';
     SpotifyDeviceComponent,
     SpotifyAuthComponent,
     LoginComponent,
+    NotFoundComponent,
+    MainComponent,
   ],
   imports: [
     BrowserModule,

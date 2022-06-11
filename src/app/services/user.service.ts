@@ -19,7 +19,7 @@ export class UserService {
   private userEndpoint = environment.serverUrl + 'users';
   private authEndpoint = environment.serverUrl + 'auth';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient) {}
 
   register(name: string) {
     return this.http
@@ -56,7 +56,6 @@ export class UserService {
 
   logout() {
     this.clearLocalStorage();
-    this.router.navigate(['/']);
   }
   get username(): string | null {
     // TODO ask the API if username doesn't exist
