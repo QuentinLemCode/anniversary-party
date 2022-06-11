@@ -14,10 +14,10 @@ describe('UserService', () => {
         {
           provide: Router,
           useValue: {
-            navigate: () => {}
-          }
-        }
-      ]
+            navigate: () => {},
+          },
+        },
+      ],
     });
     service = TestBed.inject(UserService);
   });

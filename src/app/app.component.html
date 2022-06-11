@@ -4,7 +4,9 @@
     <nav *ngIf="isLoggedIn">
       <ul>
         <li><a routerLink="/music-manager">Choisir la musique</a></li>
-        <li *ngIf="isAdmin"><a routerLink="/admin/spotify-device">Connecter Spotify</a></li>
+        <li *ngIf="isAdmin">
+          <a routerLink="/admin/spotify-device">Connecter Spotify</a>
+        </li>
         <li><button (click)="logout()">Se déconnecter</button></li>
       </ul>
     </nav>

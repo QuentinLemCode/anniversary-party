@@ -13,16 +13,16 @@ describe('AuthGuard', () => {
         {
           provide: UserService,
           useValue: {
-            isLoggedIn: true
-          }
+            isLoggedIn: true,
+          },
         },
         {
           provide: Router,
           useValue: {
-            navigate: () => {}
-          }
-        }
-      ]
+            navigate: () => {},
+          },
+        },
+      ],
     });
     guard = TestBed.inject(AuthGuard);
   });

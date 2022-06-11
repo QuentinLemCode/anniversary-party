@@ -11,16 +11,28 @@ import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { MainComponent } from './main/main.component';
 
 const routes: Routes = [
-  {path: 'admin/spotify-auth', component: SpotifyAuthComponent, canActivate: [AuthGuard, AdminGuard]},
-  {path: 'admin/spotify-device', component: SpotifyDeviceComponent, canActivate: [AuthGuard, AdminGuard]},
-  {path: 'login', component: LoginComponent, canActivate: [NotAuthGuard]},
-  {path: 'music-manager', component: MusicManagerComponent, canActivate: [AuthGuard]},
-  {path: '', component: MainComponent, canActivate: [AuthGuard]},
-  {path: '**', component: NotFoundComponent}
+  {
+    path: 'admin/spotify-auth',
+    component: SpotifyAuthComponent,
+    canActivate: [AuthGuard, AdminGuard],
+  },
+  {
+    path: 'admin/spotify-device',
+    component: SpotifyDeviceComponent,
+    canActivate: [AuthGuard, AdminGuard],
+  },
+  { path: 'login', component: LoginComponent, canActivate: [NotAuthGuard] },
+  {
+    path: 'music-manager',
+    component: MusicManagerComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: '', component: MainComponent, canActivate: [AuthGuard] },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

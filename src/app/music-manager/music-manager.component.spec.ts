@@ -10,10 +10,9 @@ describe('MusicManagerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MusicManagerComponent ],
-      imports: [ HttpClientTestingModule, ReactiveFormsModule, FormsModule ]
-    })
-    .compileComponents();
+      declarations: [MusicManagerComponent],
+      imports: [HttpClientTestingModule, ReactiveFormsModule, FormsModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {

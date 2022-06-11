@@ -11,24 +11,23 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoginComponent ],
+      declarations: [LoginComponent],
       providers: [
         {
           provide: UserService,
           useValue: {
-            register: EMPTY
-          }
+            register: EMPTY,
+          },
         },
         {
           provide: Router,
           useValue: {
-            navigate: () => {}
-          }
-        }
+            navigate: () => null,
+          },
+        },
       ],
-      imports: [FormsModule, ReactiveFormsModule]
-    })
-    .compileComponents();
+      imports: [FormsModule, ReactiveFormsModule],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;

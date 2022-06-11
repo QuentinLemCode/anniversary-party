@@ -10,18 +10,18 @@ import { UserService } from '../services/user.service';
 })
 export class LoginComponent {
   form = new FormGroup({
-    name: new FormControl<string>(''),
+    name: new FormControl(''),
   });
 
   get name() {
-    return this.form.get('name')!;
+    return this.form.value.name;
   }
 
   constructor(private user: UserService, private router: Router) {}
 
   login() {
-    if (!this.name.value) return;
-    this.user.login(this.name.value).subscribe({
+    if (!this.name) return;
+    this.user.login(this.name).subscribe({
       next: () => {
         this.router.navigate(['/']);
       },

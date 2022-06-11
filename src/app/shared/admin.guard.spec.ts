@@ -14,13 +14,11 @@ describe('AdminGuard', () => {
           provide: UserService,
           useValue: {
             isLoggedIn: true,
-            isAdmin: () => true
-          }
-        }
+            isAdmin: () => true,
+          },
+        },
       ],
-      imports: [
-        RouterTestingModule
-      ]
+      imports: [RouterTestingModule],
     });
     guard = TestBed.inject(AdminGuard);
   });

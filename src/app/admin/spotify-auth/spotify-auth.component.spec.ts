@@ -11,25 +11,24 @@ describe('SpotifyAuthComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SpotifyAuthComponent ],
+      declarations: [SpotifyAuthComponent],
       providers: [
         {
           provide: ActivatedRoute,
           useValue: {
             snapshot: {
-              queryParamMap: new URLSearchParams()
-            }
-          }
+              queryParamMap: new URLSearchParams(),
+            },
+          },
         },
         {
           provide: MusicApiService,
           useValue: {
-            authenticatePlayer: () => EMPTY
-          }
-        }
-      ]
-    })
-    .compileComponents();
+            authenticatePlayer: () => EMPTY,
+          },
+        },
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(SpotifyAuthComponent);
     component = fixture.componentInstance;

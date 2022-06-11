@@ -1,13 +1,14 @@
 <form [formGroup]="form">
   <fieldset>
-      <legend>Prends part à la fête !</legend>
-      <div class="form-field">
-          <label>Ton prénom :</label>
-          <input name="email" formControlName="name">
-      </div>
+    <legend>Prends part à la fête !</legend>
+    <div class="form-field">
+      <label>Ton prénom :</label>
+      <input name="email" formControlName="name" />
+    </div>
   </fieldset>
   <div class="form-buttons">
-      <button class="button button-primary"
-              (click)="login()">C'est parti !</button>
+    <button class="button button-primary" (click)="login()">
+      C'est parti !
+    </button>
   </div>
 </form>

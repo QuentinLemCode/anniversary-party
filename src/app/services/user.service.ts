@@ -9,7 +9,7 @@ enum LocalStorageKeys {
   TOKEN = 'token',
   USER = 'user',
   EXPIRES_AT = 'expires_at',
-  ROLE = 'role'
+  ROLE = 'role',
 }
 
 @Injectable({
@@ -59,14 +59,14 @@ export class UserService {
   }
   get username(): string | null {
     // TODO ask the API if username doesn't exist
-    if(this.isLoggedIn) {
+    if (this.isLoggedIn) {
       return localStorage.getItem(LocalStorageKeys.USER);
     }
     return null;
   }
 
   get isLoggedIn(): boolean {
-    let authToken = this.getToken();
+    const authToken = this.getToken();
     return authToken !== null ? true : false;
   }
 
@@ -86,9 +86,8 @@ export class UserService {
   }
 
   private clearLocalStorage() {
-    Object.values(LocalStorageKeys).forEach(val => {
+    Object.values(LocalStorageKeys).forEach((val) => {
       localStorage.removeItem(val);
     });
   }
-
 }

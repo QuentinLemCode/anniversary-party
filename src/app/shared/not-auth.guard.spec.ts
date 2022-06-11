@@ -14,10 +14,10 @@ describe('NotAuthGuard', () => {
         {
           provide: UserService,
           useValue: {
-            isLoggedIn: true
-          }
-        }
-      ]
+            isLoggedIn: true,
+          },
+        },
+      ],
     });
     guard = TestBed.inject(NotAuthGuard);
   });
