@@ -25,7 +25,6 @@ type SpotifyID = string;
 export type SpotifyURI<T extends SpotifyCategoryID = SpotifyCategoryID> =
   `spotify:${T}:${SpotifyID}`;
 
-
 export interface QueueMusic {
   uri: SpotifyURI<SpotifyTrackCategory>;
 }

@@ -1,18 +1,19 @@
 <div>
-  <label>Rechercher une musique
-    <input type="text" [formControl]="search">
+  <label
+    >Rechercher une musique
+    <input type="text" [formControl]="search" />
   </label>
 </div>
 
 <p *ngIf="loading">Chargement ...</p>
 <p *ngIf="error">Erreur</p>
 
-<div *ngIf='results !== null'>
-  <div *ngFor='let result of results'>
-    <p>{{result.artist}}</p>
-    <p>{{result.title}}</p>
-    <p>{{result.album}}</p>
-    <img [src]='result.cover' />
-    <button (click)='addToQueue(result.uri)'>Ajouter à la playlist</button>
+<div *ngIf="results !== null">
+  <div *ngFor="let result of results">
+    <p>{{ result.artist }}</p>
+    <p>{{ result.title }}</p>
+    <p>{{ result.album }}</p>
+    <img [src]="result.cover" />
+    <button (click)="addToQueue(result.uri)">Ajouter à la playlist</button>
   </div>
 </div>
