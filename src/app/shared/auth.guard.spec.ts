@@ -19,7 +19,7 @@ describe('AuthGuard', () => {
         {
           provide: Router,
           useValue: {
-            navigate: () => {},
+            navigate: () => null,
           },
         },
       ],

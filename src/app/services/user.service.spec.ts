@@ -14,7 +14,7 @@ describe('UserService', () => {
         {
           provide: Router,
           useValue: {
-            navigate: () => {},
+            navigate: () => null,
           },
         },
       ],
