@@ -3,4 +3,5 @@ export interface UserLogin {
   username: string;
   id: number;
   expires_at: number;
+  role: string;
 }

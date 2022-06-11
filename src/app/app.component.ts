@@ -14,14 +14,16 @@ export class AppComponent {
     }
   }
 
-  get
-  isLoggedIn() {
+  get isLoggedIn() {
     return this.user.isLoggedIn;
   }
 
-  get
-  username() {
+  get username() {
     return this.user.username;
+  }
+  
+  get isAdmin() {
+    return this.user.isAdmin();
   }
 
   logout() {

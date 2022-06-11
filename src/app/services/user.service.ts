@@ -83,6 +83,7 @@ export class UserService {
     localStorage.setItem(LocalStorageKeys.USER, login.username);
     localStorage.setItem(LocalStorageKeys.EXPIRES_AT, '' + login.expires_at);
     localStorage.setItem(LocalStorageKeys.TOKEN, login.access_token);
+    localStorage.setItem(LocalStorageKeys.ROLE, login.role);
   }
 
   private clearLocalStorage() {
