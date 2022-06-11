@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { mergeMap, shareReplay } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-import { Music } from '../interfaces/music';
+import { Music, QueueMusic, SpotifyTrackCategory, SpotifyURI } from './music-api.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +31,10 @@ export class MusicApiService {
 
   getPlaybackStatus() {
     return this.http.get(this.endpoint + '/current-play');
+  }
+
+  addToQueue(uri: SpotifyURI<SpotifyTrackCategory>) {
+    const body: QueueMusic = { uri };
+    return this.http.post(this.endpoint + '/queue-music', body);
   }
 }
