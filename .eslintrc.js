@@ -46,7 +46,7 @@ module.exports = {
     },
     {
       files: [
-        "*.html"
+        "*.component.html"
       ],
       extends: [
         "plugin:@angular-eslint/template/recommended"
@@ -59,7 +59,7 @@ module.exports = {
     node: true,
     jest: true,
   },
-  ignorePatterns: ['.eslintrc.js', "projects/**/*"],
+  ignorePatterns: ['.eslintrc.js', "projects/**/*", "src/index.html"],
   rules: {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
