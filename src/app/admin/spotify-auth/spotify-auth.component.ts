@@ -5,14 +5,14 @@ import { MusicApiService } from '../../services/music-api.service';
 @Component({
   selector: 'app-spotify-auth',
   templateUrl: './spotify-auth.component.html',
-  styleUrls: ['./spotify-auth.component.scss']
+  styleUrls: ['./spotify-auth.component.scss'],
 })
 export class SpotifyAuthComponent implements OnInit {
   error: string | null = null;
   authenticated = false;
-  currentSong: string = '';
+  currentSong = '';
 
-  constructor(private route: ActivatedRoute, private music: MusicApiService) { }
+  constructor(private route: ActivatedRoute, private music: MusicApiService) {}
 
   ngOnInit(): void {
     const code = this.route.snapshot.queryParamMap.get('code');
@@ -28,16 +28,15 @@ export class SpotifyAuthComponent implements OnInit {
     this.music.authenticatePlayer(code).subscribe({
       next: () => {
         this.authenticated = true;
-      }
+      },
     });
   }
 
   getCurrentSong() {
     this.music.getPlaybackStatus().subscribe({
-      next: (result: any) => {
-        this.currentSong = result.item.name;
-      }
-    })
+      next: (result) => {
+        this.currentSong = result?.title || '';
+      },
+    });
   }
-
 }

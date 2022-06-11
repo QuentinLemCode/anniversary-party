@@ -39,7 +39,7 @@ export class MusicApiService {
   }
 
   getPlaybackStatus() {
-    return this.http.get(this.endpoint + '/current-play');
+    return this.http.get<Music | null>(this.endpoint + '/current-play');
   }
 
   addToQueue(uri: SpotifyURI<SpotifyTrackCategory>) {
