@@ -10,6 +10,7 @@ import { MusicApiService } from '../../services/music-api.service';
 export class SpotifyAuthComponent implements OnInit {
   error: string | null = null;
   authenticated = false;
+  currentSong: string = '';
 
   constructor(private route: ActivatedRoute, private music: MusicApiService) { }
 
@@ -29,6 +30,14 @@ export class SpotifyAuthComponent implements OnInit {
         this.authenticated = true;
       }
     });
+  }
+
+  getCurrentSong() {
+    this.music.getPlaybackStatus().subscribe({
+      next: (result: any) => {
+        this.currentSong = result.item.name;
+      }
+    })
   }
 
 }

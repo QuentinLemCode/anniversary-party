@@ -30,6 +30,6 @@ export class MusicApiService {
   }
 
   getPlaybackStatus() {
-
+    return this.http.get(this.endpoint + '/current-play');
   }
 }
