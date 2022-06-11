@@ -9,6 +9,9 @@ import { NotAuthGuard } from './shared/not-auth.guard';
 import { AdminGuard } from './shared/admin.guard';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { MainComponent } from './main/main.component';
+import { PasswordComponent } from './login/password/password.component';
+import { ChallengeComponent } from './login/challenge/challenge.component';
+import { RegisterComponent } from './login/register/register.component';
 
 const routes: Routes = [
   {
@@ -22,6 +25,21 @@ const routes: Routes = [
     canActivate: [AuthGuard, AdminGuard],
   },
   { path: 'login', component: LoginComponent, canActivate: [NotAuthGuard] },
+  {
+    path: 'login/password',
+    component: PasswordComponent,
+    canActivate: [NotAuthGuard],
+  },
+  {
+    path: 'login/challenge',
+    component: ChallengeComponent,
+    canActivate: [NotAuthGuard],
+  },
+  {
+    path: 'login/register',
+    component: RegisterComponent,
+    canActivate: [NotAuthGuard],
+  },
   {
     path: 'music-manager',
     component: MusicManagerComponent,

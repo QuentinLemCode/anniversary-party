@@ -29,16 +29,15 @@ export class UserService {
   }
 
   login(name: string) {
-    return this.http
-      .post<UserLogin>(this.authEndpoint + '/login', {
-        name,
-      })
-      .pipe(
-        shareReplay(1),
-        tap((token) => {
-          this.saveLogin(token);
-        })
-      );
+    return this.callLogin(name);
+  }
+
+  loginWithPassword(name: string, password: string) {
+    return this.callLogin(name, password);
+  }
+
+  loginWithChallenge(name: string, challenge: string) {
+    return this.callLogin(name, undefined, challenge);
   }
 
   getToken() {
@@ -88,5 +87,20 @@ export class UserService {
     Object.values(LocalStorageKeys).forEach((val) => {
       localStorage.removeItem(val);
     });
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  private callLogin(name: string, password?: string, challenge?: string) {
+    return this.http
+      .post<UserLogin>(this.authEndpoint + '/login', {
+        name,
+        password,
+      })
+      .pipe(
+        shareReplay(1),
+        tap((token) => {
+          this.saveLogin(token);
+        })
+      );
   }
 }

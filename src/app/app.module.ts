@@ -11,6 +11,9 @@ import { LoginComponent } from './login/login.component';
 import { JwtInterceptor } from './shared/jwt.interceptor';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { MainComponent } from './main/main.component';
+import { PasswordComponent } from './login/password/password.component';
+import { ChallengeComponent } from './login/challenge/challenge.component';
+import { RegisterComponent } from './login/register/register.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,9 @@ import { MainComponent } from './main/main.component';
     LoginComponent,
     NotFoundComponent,
     MainComponent,
+    PasswordComponent,
+    ChallengeComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
