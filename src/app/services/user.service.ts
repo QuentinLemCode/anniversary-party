@@ -20,10 +20,11 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  register(name: string) {
+  register(name: string, challenge: string) {
     return this.http
       .post(this.userEndpoint + '/register', {
         name,
+        challenge,
       })
       .pipe(shareReplay(1));
   }

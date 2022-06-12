@@ -14,6 +14,7 @@ import { MainComponent } from './main/main.component';
 import { PasswordComponent } from './login/password/password.component';
 import { ChallengeComponent } from './login/challenge/challenge.component';
 import { RegisterComponent } from './login/register/register.component';
+import { ChallengeFormComponent } from './login/challenge-form/challenge-form.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { RegisterComponent } from './login/register/register.component';
     PasswordComponent,
     ChallengeComponent,
     RegisterComponent,
+    ChallengeFormComponent,
   ],
   imports: [
     BrowserModule,

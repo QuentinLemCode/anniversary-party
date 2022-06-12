@@ -1,0 +1,24 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <label
+    >Ton année de naissance
+    <input
+      type="number"
+      formControlName="birthYearControl"
+      [min]="1900"
+      [max]="2020"
+  /></label>
+  <fieldset>
+    <div *ngFor="let emoji of emojis">
+      <label>
+        {{ emoji.emoji }}
+        <input
+          type="radio"
+          [value]="emoji.description"
+          formControlName="emojiControl"
+        />
+      </label>
+    </div>
+  </fieldset>
+  <button type="submit">Envoyer</button>
+  <p *ngIf="error">{{ error }}</p>
+</form>
