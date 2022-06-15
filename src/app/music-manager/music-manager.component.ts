@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MusicApiService } from '../services/music-api.service';
+import { of } from 'rxjs';
 import {
   catchError,
   debounceTime,
@@ -11,13 +11,9 @@ import {
   takeUntil,
   tap,
 } from 'rxjs/operators';
+import { Music } from '../services/music-api.interface';
+import { MusicApiService } from '../services/music-api.service';
 import { UnsubscribableComponent } from '../utils/unsubscribable-component';
-import { of } from 'rxjs';
-import {
-  Music,
-  SpotifyTrackCategory,
-  SpotifyURI,
-} from '../services/music-api.interface';
 
 @Component({
   selector: 'app-music-manager',
@@ -64,8 +60,8 @@ export class MusicManagerComponent
       });
   }
 
-  addToQueue(uri: SpotifyURI<SpotifyTrackCategory>) {
-    this.music.addToQueue(uri).subscribe({
+  addToQueue(music: Music) {
+    this.music.addToQueue(music).subscribe({
       next: () => console.log('ok'),
     });
   }
