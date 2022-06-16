@@ -1,1 +1,21 @@
-<button (click)="login()">Login to spotify</button>
+<p *ngIf="error">{{ error }}</p>
+
+<div *ngIf="musicStatus; else loading">
+  <div
+    *ngIf="
+      musicStatus.isSpotifyAccountRegistered === true;
+      else notAuthenticated
+    "
+  >
+    Connecté à Spotify
+    <p *ngIf="musicStatus.currentPlay?.title as title">Musique : {{ title }}</p>
+  </div>
+</div>
+
+<ng-template #notAuthenticated>
+  <button (click)="login()">Login to spotify</button>
+</ng-template>
+
+<ng-template #loading>
+  <p>Chargement...</p>
+</ng-template>

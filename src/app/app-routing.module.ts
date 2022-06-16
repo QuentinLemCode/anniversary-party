@@ -1,24 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SpotifyAuthComponent } from './admin/spotify-auth/spotify-auth.component';
 import { SpotifyDeviceComponent } from './admin/spotify-device/spotify-device.component';
-import { MusicManagerComponent } from './music-manager/music-manager.component';
+import { ChallengeComponent } from './login/challenge/challenge.component';
 import { LoginComponent } from './login/login.component';
+import { PasswordComponent } from './login/password/password.component';
+import { RegisterComponent } from './login/register/register.component';
+import { MainComponent } from './main/main.component';
+import { MusicManagerComponent } from './music-manager/music-manager.component';
+import { AdminGuard } from './shared/admin.guard';
 import { AuthGuard } from './shared/auth.guard';
 import { NotAuthGuard } from './shared/not-auth.guard';
-import { AdminGuard } from './shared/admin.guard';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
-import { MainComponent } from './main/main.component';
-import { PasswordComponent } from './login/password/password.component';
-import { ChallengeComponent } from './login/challenge/challenge.component';
-import { RegisterComponent } from './login/register/register.component';
 
 const routes: Routes = [
-  {
-    path: 'admin/spotify-auth',
-    component: SpotifyAuthComponent,
-    canActivate: [AuthGuard, AdminGuard],
-  },
   {
     path: 'admin/spotify-device',
     component: SpotifyDeviceComponent,
