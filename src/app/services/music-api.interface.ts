@@ -32,3 +32,25 @@ export interface Music {
   uri: SpotifyURI<Track>;
   cover: string;
 }
+
+export interface CurrentMusic {
+  isSpotifyAccountRegistered: boolean;
+  currentPlay?: Music | null;
+  queue?: Queue[];
+}
+
+export enum Status {
+  PENDING,
+  PLAYING,
+  FINISHED,
+  CANCELLED,
+}
+
+export interface Queue {
+  id: number;
+  status: Status;
+  music: Music;
+  created_at: Date;
+  updated_at: Date;
+  deleted_at: Date;
+}

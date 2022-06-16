@@ -33,9 +33,9 @@ export class SpotifyAuthComponent implements OnInit {
   }
 
   getCurrentSong() {
-    this.music.getPlaybackStatus().subscribe({
+    this.music.getStatus().subscribe({
       next: (result) => {
-        this.currentSong = result?.title || '';
+        this.currentSong = result?.currentPlay?.title || '';
       },
     });
   }

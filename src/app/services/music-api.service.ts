@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-import { Music } from './music-api.interface';
+import { CurrentMusic, Music } from './music-api.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -33,8 +33,10 @@ export class MusicApiService {
     });
   }
 
-  getPlaybackStatus() {
-    return this.http.get<Music | null>(this.endpoint + '/current-play');
+  getStatus() {
+    return this.http
+      .get<CurrentMusic>(this.endpoint)
+      .pipe(shareReplay(1, 5000));
   }
 
   addToQueue(music: Music) {
