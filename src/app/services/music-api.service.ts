@@ -28,7 +28,7 @@ export class MusicApiService {
   }
 
   authenticatePlayer(code: string) {
-    return this.http.post(this.endpoint + '/register-player', {
+    return this.http.post<CurrentMusic>(this.endpoint + '/register-player', {
       code,
     });
   }

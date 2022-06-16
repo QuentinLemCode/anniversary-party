@@ -1,7 +1,6 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { EMPTY } from 'rxjs';
-import { catchError, mergeMap } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CurrentMusic } from '../../services/music-api.interface';
 import { MusicApiService } from '../../services/music-api.service';
 
@@ -21,7 +20,18 @@ export class SpotifyDeviceComponent implements OnInit {
     };
   }
 
-  constructor(private music: MusicApiService, private route: ActivatedRoute) {}
+  handleError = (err: HttpErrorResponse) => {
+    this.error = err?.error?.error || err?.error?.message;
+    this.musicStatus = {
+      isSpotifyAccountRegistered: err?.error?.isSpotifyAccountRegistered,
+    };
+  };
+
+  constructor(
+    private music: MusicApiService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     // TODO Check referrer
@@ -31,22 +41,19 @@ export class SpotifyDeviceComponent implements OnInit {
         next: (status) => {
           this.musicStatus = status;
         },
+        error: this.handleError,
       });
     } else if (code) {
-      this.music
-        .authenticatePlayer(code)
-        .pipe(
-          mergeMap(() => this.music.getStatus()),
-          catchError(() => {
-            this.error = "Couldn't authenticate player";
-            return EMPTY;
-          })
-        )
-        .subscribe({
-          next: (status) => {
-            this.musicStatus = status;
-          },
-        });
+      this.music.authenticatePlayer(code).subscribe({
+        next: (status) => {
+          this.musicStatus = status;
+          this.router.navigate(['.'], {
+            relativeTo: this.route,
+            queryParams: {},
+          });
+        },
+        error: this.handleError,
+      });
     } else {
       this.error = 'Invalid request';
     }
