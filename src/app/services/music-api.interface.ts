@@ -31,6 +31,7 @@ export interface Music {
   album: string;
   uri: SpotifyURI<Track>;
   cover: string;
+  duration: number;
 }
 
 export interface CurrentMusic {
