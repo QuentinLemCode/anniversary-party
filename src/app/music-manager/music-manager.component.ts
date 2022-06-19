@@ -13,6 +13,7 @@ import {
 } from 'rxjs/operators';
 import { Music } from '../services/music-api.interface';
 import { MusicApiService } from '../services/music-api.service';
+import { QueueService } from '../services/queue.service';
 import { UnsubscribableComponent } from '../utils/unsubscribable-component';
 
 @Component({
@@ -29,7 +30,10 @@ export class MusicManagerComponent
   loading = false;
   error = false;
 
-  constructor(private music: MusicApiService) {
+  constructor(
+    private readonly music: MusicApiService,
+    private readonly queue: QueueService
+  ) {
     super();
   }
 
@@ -61,7 +65,7 @@ export class MusicManagerComponent
   }
 
   addToQueue(music: Music) {
-    this.music.addToQueue(music).subscribe({
+    this.queue.push(music).subscribe({
       next: () => console.log('ok'),
     });
   }

@@ -38,8 +38,4 @@ export class MusicApiService {
       .get<CurrentMusic>(this.endpoint)
       .pipe(shareReplay(1, 5000));
   }
-
-  addToQueue(music: Music) {
-    return this.http.post(this.endpoint + '/queue', music);
-  }
 }
