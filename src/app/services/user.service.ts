@@ -46,7 +46,7 @@ export class UserService {
   }
 
   isTokenExpired() {
-    return !this.expires_at || this.expires_at >= Date.now();
+    return !this.expires_at || this.expires_at <= this.now();
   }
 
   isAdmin() {
@@ -65,6 +65,9 @@ export class UserService {
   }
 
   get isLoggedIn(): boolean {
+    if (this.isTokenExpired()) {
+      return false;
+    }
     const authToken = this.getToken();
     return authToken !== null ? true : false;
   }
@@ -75,6 +78,10 @@ export class UserService {
       return null;
     }
     return +lsItem;
+  }
+
+  private now() {
+    return Math.floor(Date.now() / 1000);
   }
 
   private saveLogin(login: UserLogin) {
