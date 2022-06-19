@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { UserService } from '../../services/user.service';
 
@@ -11,7 +12,7 @@ describe('PasswordComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [PasswordComponent],
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, FormsModule, ReactiveFormsModule],
       providers: [
         {
           provide: UserService,
