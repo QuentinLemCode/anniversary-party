@@ -30,10 +30,11 @@ export class LoginComponent {
           return this.navigateTo('register');
         }
         if (error.status === 403) {
-          return this.navigateTo('password');
-        }
-        if (error.status === 401) {
-          return this.navigateTo('challenge');
+          if (error.error.cause === 'password') {
+            return this.navigateTo('password');
+          } else if (error.error.cause === 'challenge') {
+            return this.navigateTo('challenge');
+          }
         }
         return;
       },

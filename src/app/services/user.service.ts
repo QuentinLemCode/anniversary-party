@@ -22,11 +22,15 @@ export class UserService {
 
   register(name: string, challenge: string) {
     return this.http
-      .post(this.userEndpoint + '/register', {
+      .post<UserLogin>(this.userEndpoint + '/register', {
         name,
         challenge,
       })
-      .pipe(shareReplay(1));
+      .pipe(
+        tap((token) => {
+          this.saveLogin(token);
+        }, shareReplay(1))
+      );
   }
 
   login(name: string) {
@@ -103,6 +107,7 @@ export class UserService {
       .post<UserLogin>(this.authEndpoint + '/login', {
         name,
         password,
+        challenge,
       })
       .pipe(
         shareReplay(1),
