@@ -1,12 +1,10 @@
+<h1>Prends part à la fête !</h1>
 <form [formGroup]="form" (ngSubmit)="login()">
-  <fieldset>
-    <legend>Prends part à la fête !</legend>
-    <div class="form-field">
-      <label>Ton prénom :</label>
-      <input name="email" formControlName="name" />
-    </div>
-  </fieldset>
-  <div class="form-buttons">
-    <button type="submit" class="button button-primary">C'est parti !</button>
-  </div>
+  <p>
+    <label>Ton prénom :</label>
+    <input name="email" formControlName="name" />
+  </p>
+  <p>
+    <button type="submit">C'est parti !</button>
+  </p>
 </form>

@@ -1,16 +1,15 @@
-<main class="container mx-auto px-3">
+<header>
   <div *ngIf="isLoggedIn">
     Bonsoir {{ username }}
     <nav *ngIf="isLoggedIn">
-      <ul>
-        <li><a routerLink="/music-manager">Choisir la musique</a></li>
-        <li *ngIf="isAdmin">
-          <a routerLink="/admin/spotify-device">Connecter Spotify</a>
-        </li>
-        <li><button (click)="logout()">Se déconnecter</button></li>
-      </ul>
+      <a routerLink="/music-manager">Choisir la musique</a>
+      <a *ngIf="isAdmin" routerLink="/admin/spotify-device"
+        >Connecter Spotify</a
+      >
     </nav>
+    <button (click)="logout()">Se déconnecter</button>
   </div>
-
+</header>
+<main class="container mx-auto px-3">
   <router-outlet></router-outlet>
 </main>
