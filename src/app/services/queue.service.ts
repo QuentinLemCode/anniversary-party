@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Music } from './music-api.interface';
+import { Music, Queue } from './music-api.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +16,6 @@ export class QueueService {
   }
 
   get() {
-    return this.http.get(this.endpoint);
+    return this.http.get<Queue[]>(this.endpoint);
   }
 }

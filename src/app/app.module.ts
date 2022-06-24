@@ -14,6 +14,7 @@ import { MainComponent } from './main/main.component';
 import { MusicManagerComponent } from './music-manager/music-manager.component';
 import { JwtInterceptor } from './shared/jwt.interceptor';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
+import { MusicComponent } from './components/music/music.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { NotFoundComponent } from './shared/not-found/not-found.component';
     ChallengeComponent,
     RegisterComponent,
     ChallengeFormComponent,
+    MusicComponent,
   ],
   imports: [
     BrowserModule,

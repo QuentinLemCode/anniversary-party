@@ -1,0 +1,8 @@
+<article *ngIf="music">
+  <div class="cover">
+    <img [src]="music.cover" alt="album cover" />
+  </div>
+  <div class="title">{{ music.title }}</div>
+  <div class="artist">{{ music.artist }}</div>
+  <div class="vote"><button (click)="vote()">⚡</button></div>
+</article>

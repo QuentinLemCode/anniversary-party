@@ -1,1 +1,5 @@
-<p>main works!</p>
+<div *ngIf="$queue | async as playlist; else loading">
+  <app-music *ngFor="let item of playlist" [queue]="item"></app-music>
+</div>
+
+<ng-template #loading>Chargement</ng-template>
