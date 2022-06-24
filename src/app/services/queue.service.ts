@@ -14,4 +14,8 @@ export class QueueService {
   push(music: Music) {
     return this.http.post(this.endpoint, music);
   }
+
+  get() {
+    return this.http.get(this.endpoint);
+  }
 }
