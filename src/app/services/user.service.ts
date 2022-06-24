@@ -61,7 +61,6 @@ export class UserService {
     this.clearLocalStorage();
   }
   get username(): string | null {
-    // TODO ask the API if username doesn't exist
     if (this.isLoggedIn) {
       return localStorage.getItem(LocalStorageKeys.USER);
     }
@@ -101,7 +100,6 @@ export class UserService {
     });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private callLogin(name: string, password?: string, challenge?: string) {
     return this.http
       .post<UserLogin>(this.authEndpoint + '/login', {
