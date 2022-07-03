@@ -9,7 +9,7 @@
   </div>
 </header>
 <main>
-  <app-search></app-search>
+  <app-search *ngIf="isLoggedIn"></app-search>
   <app-queue></app-queue>
   <router-outlet></router-outlet>
 </main>
