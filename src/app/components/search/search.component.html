@@ -5,7 +5,7 @@
 />
 
 <p *ngIf="loading">Chargement ...</p>
-<p *ngIf="error">Erreur</p>
+<p *ngIf="error">{{ error }}</p>
 
 <div *ngIf="results !== null">
   <div *ngFor="let result of results">

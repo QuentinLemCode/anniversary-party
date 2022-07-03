@@ -49,14 +49,14 @@ export class SearchComponent extends UnsubscribableComponent implements OnInit {
         tap(() => (this.loading = true)),
         mergeMap((query) => {
           if (query === '') {
-            return of([]);
+            return of(null);
           }
           return this.music.search(query).pipe(
             tap(() => (this.error = '')),
             catchError(() => {
               this.error = SearchComponent.ERROR_MESSAGE;
               this.loading = false;
-              return of([]);
+              return of(null);
             })
           );
         })
@@ -68,7 +68,7 @@ export class SearchComponent extends UnsubscribableComponent implements OnInit {
         },
         error: () => {
           this.loading = false;
-          this.results = [];
+          this.results = null;
           this.error = SearchComponent.ERROR_MESSAGE;
         },
       });
