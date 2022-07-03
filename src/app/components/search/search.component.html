@@ -1,10 +1,8 @@
-<div>
-  <input
-    type="text"
-    [formControl]="search"
-    placeholder="Rechercher une musique"
-  />
-</div>
+<input
+  type="text"
+  [formControl]="search"
+  placeholder="Rechercher une musique"
+/>
 
 <p *ngIf="loading">Chargement ...</p>
 <p *ngIf="error">Erreur</p>

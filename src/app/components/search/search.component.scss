@@ -4,8 +4,14 @@
   border-radius: 33px;
   background: var(--bg-secondary);
   margin: 20px 0;
+  padding: 14px;
 }
 
 input {
   width: 100%;
+  background: var(--bg-primary);
+  color: var(--font-secondary);
+  &::placeholder {
+    color: var(--font-secondary);
+  }
 }

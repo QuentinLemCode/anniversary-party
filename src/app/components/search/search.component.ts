@@ -6,7 +6,6 @@ import {
   debounceTime,
   distinctUntilChanged,
   filter,
-  finalize,
   mergeMap,
   takeUntil,
   tap,
@@ -25,7 +24,8 @@ export class SearchComponent extends UnsubscribableComponent implements OnInit {
   search = new FormControl<string>('');
   results: Music[] | null = null;
   loading = false;
-  error = false;
+  error = '';
+  static readonly ERROR_MESSAGE = "Une erreur s'est produite, désolé 😫";
 
   constructor(
     private readonly music: MusicApiService,
@@ -44,24 +44,33 @@ export class SearchComponent extends UnsubscribableComponent implements OnInit {
         filter<string | null, string>(
           (query): query is string => typeof query === 'string'
         ),
-        filter((query) => query !== ''),
         distinctUntilChanged(),
         debounceTime(500),
         tap(() => (this.loading = true)),
-        finalize(() => (this.loading = false)),
-        mergeMap((query) =>
-          this.music.search(query).pipe(
-            tap(() => (this.error = false)),
+        mergeMap((query) => {
+          if (query === '') {
+            return of([]);
+          }
+          return this.music.search(query).pipe(
+            tap(() => (this.error = '')),
             catchError(() => {
-              this.error = true;
+              this.error = SearchComponent.ERROR_MESSAGE;
               this.loading = false;
               return of([]);
             })
-          )
-        )
+          );
+        })
       )
       .subscribe({
-        next: (results) => (this.results = results),
+        next: (results) => {
+          this.results = results;
+          this.loading = false;
+        },
+        error: () => {
+          this.loading = false;
+          this.results = [];
+          this.error = SearchComponent.ERROR_MESSAGE;
+        },
       });
   }
 
