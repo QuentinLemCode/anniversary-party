@@ -6,7 +6,6 @@ import { LoginComponent } from './login/login.component';
 import { PasswordComponent } from './login/password/password.component';
 import { RegisterComponent } from './login/register/register.component';
 import { MainComponent } from './main/main.component';
-import { MusicManagerComponent } from './music-manager/music-manager.component';
 import { AdminGuard } from './shared/admin.guard';
 import { AuthGuard } from './shared/auth.guard';
 import { NotAuthGuard } from './shared/not-auth.guard';
@@ -33,11 +32,6 @@ const routes: Routes = [
     path: 'login/register',
     component: RegisterComponent,
     canActivate: [NotAuthGuard],
-  },
-  {
-    path: 'music-manager',
-    component: MusicManagerComponent,
-    canActivate: [AuthGuard],
   },
   { path: '', component: MainComponent, canActivate: [AuthGuard] },
   { path: '**', component: NotFoundComponent },

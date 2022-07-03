@@ -1,8 +1,9 @@
 <div>
-  <label
-    >Rechercher une musique
-    <input type="text" [formControl]="search" />
-  </label>
+  <input
+    type="text"
+    [formControl]="search"
+    placeholder="Rechercher une musique"
+  />
 </div>
 
 <p *ngIf="loading">Chargement ...</p>

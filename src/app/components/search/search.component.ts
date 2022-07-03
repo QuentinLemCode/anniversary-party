@@ -11,20 +11,17 @@ import {
   takeUntil,
   tap,
 } from 'rxjs/operators';
-import { Music } from '../services/music-api.interface';
-import { MusicApiService } from '../services/music-api.service';
-import { QueueService } from '../services/queue.service';
-import { UnsubscribableComponent } from '../utils/unsubscribable-component';
+import { Music } from '../../services/music-api.interface';
+import { MusicApiService } from '../../services/music-api.service';
+import { QueueService } from '../../services/queue.service';
+import { UnsubscribableComponent } from '../../utils/unsubscribable-component';
 
 @Component({
-  selector: 'app-music-manager',
-  templateUrl: './music-manager.component.html',
-  styleUrls: ['./music-manager.component.scss'],
+  selector: 'app-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.scss'],
 })
-export class MusicManagerComponent
-  extends UnsubscribableComponent
-  implements OnInit
-{
+export class SearchComponent extends UnsubscribableComponent implements OnInit {
   search = new FormControl<string>('');
   results: Music[] | null = null;
   loading = false;
@@ -47,8 +44,9 @@ export class MusicManagerComponent
         filter<string | null, string>(
           (query): query is string => typeof query === 'string'
         ),
+        filter((query) => query !== ''),
         distinctUntilChanged(),
-        debounceTime(300),
+        debounceTime(500),
         tap(() => (this.loading = true)),
         finalize(() => (this.loading = false)),
         mergeMap((query) =>

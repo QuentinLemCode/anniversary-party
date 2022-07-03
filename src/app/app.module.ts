@@ -2,26 +2,25 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SpotifyDeviceComponent } from './admin/spotify-device/spotify-device.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { MusicComponent } from './components/music/music.component';
+import { QueueComponent } from './components/queue/queue.component';
+import { SearchComponent } from './components/search/search.component';
 import { ChallengeFormComponent } from './login/challenge-form/challenge-form.component';
 import { ChallengeComponent } from './login/challenge/challenge.component';
 import { LoginComponent } from './login/login.component';
 import { PasswordComponent } from './login/password/password.component';
 import { RegisterComponent } from './login/register/register.component';
 import { MainComponent } from './main/main.component';
-import { MusicManagerComponent } from './music-manager/music-manager.component';
 import { JwtInterceptor } from './shared/jwt.interceptor';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
-import { MusicComponent } from './components/music/music.component';
-import { QueueComponent } from './components/queue/queue.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MusicManagerComponent,
     SpotifyDeviceComponent,
     LoginComponent,
     NotFoundComponent,
@@ -32,6 +31,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ChallengeFormComponent,
     MusicComponent,
     QueueComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

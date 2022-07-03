@@ -37,6 +37,9 @@ input {
   background: var(--bg-secondary);
   border-radius: 25px;
   border: none;
+  padding: 25px;
+  cursor: pointer;
+  color: var(--font-primary);
 
   &:disabled {
     background: var(--disabled);
@@ -45,6 +48,8 @@ input {
 
 main {
   padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
 img {

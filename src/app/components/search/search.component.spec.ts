@@ -2,21 +2,19 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MusicManagerComponent } from './music-manager.component';
+import { SearchComponent } from './search.component';
 
-describe('MusicManagerComponent', () => {
-  let component: MusicManagerComponent;
-  let fixture: ComponentFixture<MusicManagerComponent>;
+describe('SearchComponent', () => {
+  let component: SearchComponent;
+  let fixture: ComponentFixture<SearchComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MusicManagerComponent],
+      declarations: [SearchComponent],
       imports: [HttpClientTestingModule, ReactiveFormsModule, FormsModule],
     }).compileComponents();
-  });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(MusicManagerComponent);
+    fixture = TestBed.createComponent(SearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
