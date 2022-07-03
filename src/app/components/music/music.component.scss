@@ -1,0 +1,48 @@
+:host {
+  display: inline-flex;
+  max-width: 100%;
+  min-width: 100%;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+
+  /* Light_Background_primary */
+
+  background: #F0F3F8;
+  border-radius: 15px;
+
+  font-family: 'Poppins';
+  font-style: normal;
+  line-height: 24px;
+  font-weight: 400;
+  color: #191919;
+
+  .cover {
+
+    width: 60px;
+    height: 60px;
+
+    border-radius: 10px;
+    order: 0;
+    flex: 0 0 60px;
+  }
+
+  .info {
+    flex: 1 1 auto;
+    white-space: nowrap;
+    overflow: hidden;
+    div {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+  .adder {
+    font-size: 16px;
+  }
+
+  .title {
+    font-weight: 600;
+  }
+
+}

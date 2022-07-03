@@ -48,10 +48,9 @@ export enum Status {
 }
 
 export interface Queue {
-  id: number;
   status: Status;
   music: Music;
-  created_at: Date;
-  updated_at: Date;
-  deleted_at: Date;
+  user: {
+    name: string;
+  };
 }

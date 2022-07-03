@@ -14,6 +14,10 @@ export class MusicComponent {
     return this.queue?.music;
   }
 
+  get username(): string | undefined {
+    return this.queue?.user.name;
+  }
+
   vote() {
     console.log('clicked');
   }

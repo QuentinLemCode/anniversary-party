@@ -1,0 +1,6 @@
+<p *ngIf="loading">Chargement ...</p>
+<p *ngIf="error">Erreur</p>
+
+<ng-container *ngIf="queues !== null">
+  <app-music *ngFor="let queue of queues" [queue]="queue"></app-music>
+</ng-container>
