@@ -6,7 +6,6 @@
         >Connecter Spotify</a
       >
     </nav>
-    <button (click)="logout()">Se déconnecter</button>
   </div>
 </header>
 <main>
@@ -17,13 +16,15 @@
 <footer>
   <p>
     Développé avec ❤️ par QuentinLemCode
-    <a href="https://twitter.com/QuentinLemCode"
+    <a class="icon-link" href="https://twitter.com/QuentinLemCode"
       ><fa-icon [icon]="faTwitter"></fa-icon
     ></a>
-    <a href="https://github.com/QuentinLemCode">
+    <a class="icon-link" href="https://github.com/QuentinLemCode">
       <fa-icon [icon]="faGithub"></fa-icon>
     </a>
     <br />
     Un très grand merci à Théo Charlot pour le design ✏️
+    <br />
+    <a *ngIf="isLoggedIn" [routerLink]="" (click)="logout()">Se déconnecter</a>
   </p>
 </footer>
