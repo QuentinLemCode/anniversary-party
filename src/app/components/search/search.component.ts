@@ -42,7 +42,7 @@ export class SearchComponent extends UnsubscribableComponent implements OnInit {
 
   // TODO limit to 5 (or variable) music per user
   // TODO implement music backlog
-
+  // TODO check if music has already been added
   ngOnInit(): void {
     this.search.valueChanges
       .pipe(
