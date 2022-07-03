@@ -1,24 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { tap } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 import { Queue } from '../../services/music-api.interface';
 import { QueueService } from '../../services/queue.service';
+import { UnsubscribableComponent } from '../../utils/unsubscribable-component';
 
 @Component({
   selector: 'app-queue',
   templateUrl: './queue.component.html',
   styleUrls: ['./queue.component.scss'],
 })
-export class QueueComponent implements OnInit {
+export class QueueComponent extends UnsubscribableComponent implements OnInit {
   queues: Queue[] | null = null;
   loading = true;
   error = '';
 
-  constructor(private readonly queue: QueueService) {}
+  constructor(private readonly queue: QueueService) {
+    super();
+  }
 
   ngOnInit(): void {
     this.queue
       .get()
-      .pipe(tap(() => (this.error = '')))
+      .pipe(
+        takeUntil(this.$destroy),
+        tap(() => (this.error = ''))
+      )
       .subscribe({
         next: (queue) => {
           this.queues = queue;
