@@ -21,6 +21,7 @@ describe('AppComponent', () => {
           provide: UserService,
           useValue: {
             isLoggedIn: true,
+            isAdmin: () => false,
           },
         },
       ],

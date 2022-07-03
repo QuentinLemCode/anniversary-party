@@ -16,7 +16,7 @@ describe('QueueComponent', () => {
         {
           provide: UserService,
           useValue: {
-            isAdmin: false,
+            isAdmin: () => false,
           },
         },
       ],
