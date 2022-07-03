@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { QueueComponent } from './queue.component';
@@ -9,6 +10,7 @@ describe('QueueComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [QueueComponent],
+      imports: [HttpClientTestingModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(QueueComponent);
