@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -6,7 +13,7 @@ import { FormControl, FormGroup } from '@angular/forms';
   templateUrl: './challenge-form.component.html',
   styleUrls: ['./challenge-form.component.scss'],
 })
-export class ChallengeFormComponent {
+export class ChallengeFormComponent implements OnInit {
   @Output()
   challengeSubmit = new EventEmitter<string>();
 
@@ -29,6 +36,15 @@ export class ChallengeFormComponent {
     emojiControl: new FormControl(''),
     birthYearControl: new FormControl(''),
   });
+
+  @ViewChild('input')
+  yearInput!: ElementRef<HTMLInputElement>;
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.yearInput.nativeElement.focus();
+    }, 0);
+  }
 
   get emojiValue() {
     return this.form.controls.emojiControl.value;

@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
@@ -14,6 +14,9 @@ export class PasswordComponent implements OnInit {
     password: new FormControl(''),
   });
 
+  @ViewChild('input')
+  inputPassword!: ElementRef<HTMLInputElement>;
+
   error = '';
 
   get password() {
@@ -27,6 +30,9 @@ export class PasswordComponent implements OnInit {
   name = '';
   ngOnInit(): void {
     this.name = this.route.snapshot.queryParams['name'];
+    setTimeout(() => {
+      this.inputPassword.nativeElement.focus();
+    }, 0);
   }
 
   submit() {

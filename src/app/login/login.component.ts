@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
@@ -8,7 +8,7 @@ import { UserService } from '../services/user.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   form = new FormGroup({
     name: new FormControl(''),
   });
@@ -17,7 +17,15 @@ export class LoginComponent {
     return this.form.value.name;
   }
 
+  @ViewChild('input')
+  inputLogin!: ElementRef<HTMLInputElement>;
+
   constructor(private user: UserService, private router: Router) {}
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.inputLogin.nativeElement.focus();
+    }, 0);
+  }
 
   login() {
     if (!this.name) return;
