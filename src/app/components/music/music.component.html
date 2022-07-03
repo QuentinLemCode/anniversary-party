@@ -7,5 +7,12 @@
     <div class="artist">{{ music.artist }}</div>
     <div class="adder">Ajouté par {{ username }}</div>
   </div>
-  <div class="vote"><button (click)="vote()">⚡</button></div>
+  <div class="vote">
+    <button (click)="vote()"><fa-icon [icon]="faForward"></fa-icon></button>
+  </div>
+  <div class="remove">
+    <button *ngIf="isAdmin" (click)="delete()">
+      <fa-icon [icon]="faTrash"></fa-icon>
+    </button>
+  </div>
 </ng-container>

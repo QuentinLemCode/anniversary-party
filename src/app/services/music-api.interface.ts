@@ -48,9 +48,11 @@ export enum Status {
 }
 
 export interface Queue {
+  id: number;
   status: Status;
   music: Music;
   user: {
     name: string;
   };
+  forward_votes: number;
 }

@@ -18,4 +18,12 @@ export class QueueService {
   get() {
     return this.http.get<Queue[]>(this.endpoint);
   }
+
+  forward(id: string | number) {
+    return this.http.post(this.endpoint + '/' + id + '/forward', {});
+  }
+
+  delete(id: string | number) {
+    return this.http.delete(this.endpoint + '/' + id);
+  }
 }
