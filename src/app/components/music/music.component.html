@@ -5,14 +5,21 @@
   <div class="info">
     <div class="title">{{ music.title }}</div>
     <div class="artist">{{ music.artist }}</div>
-    <div class="adder">Ajouté par {{ username }}</div>
+    <div *ngIf="username" class="adder">Ajouté par {{ username }}</div>
   </div>
-  <div class="vote">
-    <button (click)="vote()"><fa-icon [icon]="faForward"></fa-icon></button>
+  <div class="vote" *ngIf="config?.votable">
+    <button (click)="vote.emit()">
+      <fa-icon [icon]="faForward"></fa-icon>
+    </button>
   </div>
-  <div class="remove">
-    <button *ngIf="isAdmin" (click)="delete()">
+  <div class="remove" *ngIf="config?.deletable">
+    <button (click)="delete.emit()">
       <fa-icon [icon]="faTrash"></fa-icon>
+    </button>
+  </div>
+  <div class="add-to-queue" *ngIf="config?.queueable">
+    <button (click)="addToQueue.emit()">
+      <fa-icon [icon]="faAdd"></fa-icon>
     </button>
   </div>
 </ng-container>

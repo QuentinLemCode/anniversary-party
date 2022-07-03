@@ -7,6 +7,10 @@
   padding: 14px;
 }
 
+app-music {
+  background: var(--bg-secondary);
+}
+
 input {
   width: 100%;
   background: var(--bg-primary);
@@ -14,4 +18,8 @@ input {
   &::placeholder {
     color: var(--font-secondary);
   }
+}
+
+#search-results {
+  margin-top: 12px;
 }

@@ -39,6 +39,10 @@ a:visited {
   cursor: pointer;
 }
 
+textarea:focus, input:focus{
+  outline: none;
+}
+
 input {
   background: var(--bg-secondary);
   border-radius: 25px;
@@ -47,7 +51,7 @@ input {
   cursor: pointer;
   color: var(--font-primary);
   font-weight: 500;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 21px;
 
   &:disabled {

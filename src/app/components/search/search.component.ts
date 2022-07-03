@@ -14,6 +14,7 @@ import { Music } from '../../services/music-api.interface';
 import { MusicApiService } from '../../services/music-api.service';
 import { QueueService } from '../../services/queue.service';
 import { UnsubscribableComponent } from '../../utils/unsubscribable-component';
+import { MusicComponentConfiguration } from '../music/music.component';
 
 @Component({
   selector: 'app-search',
@@ -25,6 +26,11 @@ export class SearchComponent extends UnsubscribableComponent implements OnInit {
   results: Music[] | null = null;
   loading = false;
   error = '';
+  musicConfig: MusicComponentConfiguration = {
+    votable: false,
+    deletable: false,
+    queueable: true,
+  };
   static readonly ERROR_MESSAGE = "Une erreur s'est produite, désolé 😫";
 
   constructor(

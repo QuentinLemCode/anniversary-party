@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { takeUntil, tap } from 'rxjs/operators';
 import { Queue } from '../../services/music-api.interface';
 import { QueueService } from '../../services/queue.service';
+import { UserService } from '../../services/user.service';
 import { UnsubscribableComponent } from '../../utils/unsubscribable-component';
+import { MusicComponentConfiguration } from '../music/music.component';
 
 @Component({
   selector: 'app-queue',
@@ -14,7 +16,16 @@ export class QueueComponent extends UnsubscribableComponent implements OnInit {
   loading = true;
   error = '';
 
-  constructor(private readonly queue: QueueService) {
+  musicConfig: MusicComponentConfiguration = {
+    votable: true,
+    deletable: this.user.isAdmin(),
+    queueable: false,
+  };
+
+  constructor(
+    private readonly queue: QueueService,
+    private readonly user: UserService
+  ) {
     super();
   }
 
@@ -36,5 +47,13 @@ export class QueueComponent extends UnsubscribableComponent implements OnInit {
           this.error = "Erreur lors de l'obtention de la file d'attente";
         },
       });
+  }
+
+  delete(id: number) {
+    this.queue.delete(id).subscribe();
+  }
+
+  vote(id: number) {
+    this.queue.forward(id).subscribe();
   }
 }

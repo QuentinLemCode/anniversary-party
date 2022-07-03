@@ -1,5 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { UserService } from '../../services/user.service';
 
 import { QueueComponent } from './queue.component';
 
@@ -11,6 +12,14 @@ describe('QueueComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [QueueComponent],
       imports: [HttpClientTestingModule],
+      providers: [
+        {
+          provide: UserService,
+          useValue: {
+            isAdmin: false,
+          },
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(QueueComponent);

@@ -2,5 +2,12 @@
 <p *ngIf="error">Erreur</p>
 
 <ng-container *ngIf="queues !== null">
-  <app-music *ngFor="let queue of queues" [queue]="queue"></app-music>
+  <app-music
+    *ngFor="let queue of queues"
+    [music]="queue.music"
+    [username]="queue.user.name"
+    [config]="musicConfig"
+    (delete)="delete(queue.id)"
+    (vote)="vote(queue.id)"
+  ></app-music>
 </ng-container>
