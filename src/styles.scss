@@ -1,3 +1,92 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('~simpledotcss/simple.min.css');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import "./colors.scss";
+html {
+  font-family: 'Poppins';
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--font-primary);
+  line-height: 1.4;
+  display: grid;
+  grid-template-columns:
+    1fr min(60rem, 90%) 1fr;
+  margin: 0;
+
+  &>* {
+    grid-column: 2;
+  }
+  &> footer {
+    margin-top: 4rem;
+    padding: 2rem 1rem 1.5rem 1rem;
+    color: var(--text-light);
+    text-align: center;
+  }
+}
+
+a,
+a:visited {
+  color: var(--primary);
+  &:hover {
+    color: var(--primary-hover);
+  }
+}
+
+input {
+  background: var(--bg-secondary);
+  border-radius: 25px;
+  border: none;
+
+  &:disabled {
+    background: var(--disabled);
+  }
+}
+
+main {
+  padding-top: 1rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+button {
+  background: var(--primary);
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 15px 30px;
+  gap: 10px;
+
+  font-family: Poppins;
+
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+h2 {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 36px;
+  text-align: center;
+  color: var(--font-primary);
+}
+
+h1 {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 60px;
+}
