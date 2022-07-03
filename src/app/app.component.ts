@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import {
+  faGithubSquare,
+  faLinkedin,
+  faTwitterSquare,
+} from '@fortawesome/free-brands-svg-icons';
 import { UserService } from './services/user.service';
 
 @Component({
@@ -8,6 +13,10 @@ import { UserService } from './services/user.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  faTwitter = faTwitterSquare;
+  faGithub = faGithubSquare;
+  faLinkedIn = faLinkedin;
+
   constructor(private user: UserService, private router: Router) {
     if (this.user.isLoggedIn === false) {
       this.router.navigate(['login']);
