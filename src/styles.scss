@@ -32,9 +32,9 @@ body {
 
 a,
 a:visited {
-  color: var(--primary);
+  color: var(--primary-link);
   &:hover {
-    color: var(--primary-hover);
+    color: var(--primary-link-hover);
   }
   cursor: pointer;
 }
@@ -95,6 +95,9 @@ button {
   font-weight: 700;
   font-size: 16px;
   line-height: 24px;
+  &:hover {
+    background: var(--primary-hover);
+  }
 }
 
 h2 {
