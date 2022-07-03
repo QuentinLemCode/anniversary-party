@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { finalize, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { Queue } from '../../services/music-api.interface';
 import { QueueService } from '../../services/queue.service';
 
@@ -18,16 +18,15 @@ export class QueueComponent implements OnInit {
   ngOnInit(): void {
     this.queue
       .get()
-      .pipe(
-        tap(() => (this.error = '')),
-        finalize(() => (this.loading = false))
-      )
+      .pipe(tap(() => (this.error = '')))
       .subscribe({
         next: (queue) => {
           this.queues = queue;
+          this.loading = false;
         },
         error: (error) => {
           console.error(error);
+          this.loading = false;
           this.error = "Erreur lors de l'obtention de la file d'attente";
         },
       });

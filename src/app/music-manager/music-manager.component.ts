@@ -37,9 +37,6 @@ export class MusicManagerComponent
     super();
   }
 
-  // TODO implement music voting
-  // TODO implement cut music
-  // TODO show the global playlist
   // TODO limit to 5 (or variable) music per user
   // TODO implement music backlog
 
@@ -71,8 +68,6 @@ export class MusicManagerComponent
   }
 
   addToQueue(music: Music) {
-    this.queue.push(music).subscribe({
-      next: () => console.log('ok'),
-    });
+    this.queue.push(music).subscribe();
   }
 }
