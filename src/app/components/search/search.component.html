@@ -7,7 +7,7 @@
 <p *ngIf="loading">Chargement ...</p>
 <p *ngIf="error">{{ error }}</p>
 
-<div *ngIf="results !== null" id="search-results">
+<div id="search-results" [ngClass]="results === null ? 'hide' : 'show'">
   <app-music
     *ngFor="let music of results"
     [music]="music"

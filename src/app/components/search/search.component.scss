@@ -21,5 +21,14 @@ input {
 }
 
 #search-results {
-  margin-top: 12px;
+  overflow: hidden;
+  transform: scaleY(0);    
+  transform-origin: top;
+  transition: transform 0.5s ease;
+
+  &.show {
+    margin-top: 12px;
+    transform: scaleY(1);
+    transform-origin: top;
+  }
 }
