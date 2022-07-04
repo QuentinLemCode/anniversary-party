@@ -17,7 +17,7 @@ export class ChallengeFormComponent implements OnInit {
   @Output()
   challengeSubmit = new EventEmitter<string>();
 
-  emojis = [
+  private static readonly EMOJIS = [
     { emoji: '😂', description: 'Face with tears of joy' },
     { emoji: '❤️', description: 'Red heart' },
     { emoji: '🤣', description: 'Rolling on the floor laughing' },
@@ -28,7 +28,10 @@ export class ChallengeFormComponent implements OnInit {
     { emoji: '🥰', description: 'Smiling face with hearts' },
     { emoji: '😍', description: 'Smiling face with heart-eyes' },
     { emoji: '😊', description: 'Smiling face with smiling eyes' },
+    { emoji: '🔥', description: 'Fire' },
   ];
+
+  emojis = this.shuffleEmoji(ChallengeFormComponent.EMOJIS);
 
   error = '';
 
@@ -54,8 +57,6 @@ export class ChallengeFormComponent implements OnInit {
     return this.form.controls.birthYearControl.value;
   }
 
-  // TODO add favorite color
-
   submit() {
     const challenge = this.getChallengeCode();
     if (challenge === null) {
@@ -66,9 +67,30 @@ export class ChallengeFormComponent implements OnInit {
   }
 
   getChallengeCode() {
-    if (this.emojiValue === null || this.birthYearValue === null) {
+    if (
+      this.emojiValue === null ||
+      this.form.controls.birthYearControl.invalid ||
+      this.birthYearValue === null
+    ) {
       return null;
     }
     return this.emojiValue + this.birthYearValue;
+  }
+
+  private shuffleEmoji(emojis: typeof ChallengeFormComponent.EMOJIS) {
+    let currentIndex = emojis.length,
+      randomIndex;
+
+    while (currentIndex != 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      [emojis[currentIndex], emojis[randomIndex]] = [
+        emojis[randomIndex],
+        emojis[currentIndex],
+      ];
+    }
+
+    return emojis;
   }
 }

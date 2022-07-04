@@ -17,15 +17,21 @@ export class ChallengeComponent implements OnInit {
   ngOnInit(): void {
     this.name = this.route.snapshot.queryParams['name'];
   }
+  error = '';
 
   submit(challenge: string) {
     this.user.loginWithChallenge(this.name, challenge).subscribe({
       next: () => {
-        console.log('ok');
         this.router.navigate(['/']);
       },
-      error: () => {
-        console.log('nok');
+      error: (error) => {
+        if (error?.error?.cause === 'challenge') {
+          this.error =
+            "Ce n'est pas la bonne année de naissance ou le bon émoji";
+        } else if (error?.error?.cause === 'locked') {
+          this.error =
+            "Votre compte est verrouillé. Veuillez contacter l'hôte.";
+        }
       },
     });
   }

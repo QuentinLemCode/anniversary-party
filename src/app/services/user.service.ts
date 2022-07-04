@@ -29,7 +29,7 @@ export class UserService {
       .pipe(
         tap((token) => {
           this.saveLogin(token);
-        }, shareReplay(1))
+        })
       );
   }
 

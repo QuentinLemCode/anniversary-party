@@ -1,0 +1,12 @@
+form {
+  p {
+    text-align: center;
+    input {
+      min-width: 60%;
+      .ng-invalid {
+        border-color: red;
+      }
+    }
+
+  }
+}

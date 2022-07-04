@@ -20,7 +20,9 @@
     <br />
     Un très grand merci à Théo Charlot pour le design ✏️
     <br />
-    Connecté en tant que {{ username }}
+    <ng-container *ngIf="isLoggedIn"
+      >Connecté en tant que {{ username }}</ng-container
+    >
     <br />
     <a *ngIf="isLoggedIn" [routerLink]="" (click)="logout()">Se déconnecter</a>
   </p>

@@ -1,14 +1,14 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
   <p>
-    <label
-      >Ton année de naissance
-      <input
-        #input
-        type="number"
-        formControlName="birthYearControl"
-        [min]="1900"
-        [max]="2020"
-    /></label>
+    <input
+      #input
+      type="number"
+      formControlName="birthYearControl"
+      [min]="1900"
+      [max]="2020"
+      placeholder="Année de naissance"
+      required="true"
+    />
   </p>
   <p *ngFor="let emoji of emojis">
     <label>

@@ -17,6 +17,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.name = this.route.snapshot.queryParams['name'];
   }
+  error = '';
 
   submit(challenge: string) {
     this.user.register(this.name, challenge).subscribe({
@@ -24,7 +25,10 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['/']);
       },
       error: (error) => {
-        console.error(error);
+        if (error?.error?.cause === 'ip') {
+          this.error =
+            'Vous avez déjà enregistré un compte sur cet appareil. Veuillez revenir à la page précédente et vous connecter avec votre compte.';
+        }
       },
     });
   }

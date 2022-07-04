@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   form = new FormGroup({
     name: new FormControl(''),
   });
+  error = '';
 
   get name() {
     return this.form.value.name;
@@ -38,9 +39,12 @@ export class LoginComponent implements OnInit {
           return this.navigateTo('register');
         }
         if (error.status === 403) {
-          if (error.error.cause === 'password') {
+          if (error.error?.cause === 'locked') {
+            this.error =
+              "Votre compte est verrouillé. Veuillez contacter l'hôte.";
+          } else if (error.error?.cause === 'password') {
             return this.navigateTo('password');
-          } else if (error.error.cause === 'challenge') {
+          } else if (error.error?.cause === 'challenge') {
             return this.navigateTo('challenge');
           }
         }
