@@ -1,17 +1,12 @@
 <header>
-  <div *ngIf="isLoggedIn">
-    Bonsoir {{ username }}
-    <nav *ngIf="isLoggedIn">
-      <a *ngIf="isAdmin" routerLink="/admin/spotify-device"
-        >Connecter Spotify</a
-      >
-    </nav>
-  </div>
+  <nav *ngIf="isLoggedIn">
+    <a *ngIf="isAdmin" routerLink="/admin/spotify-device">Connecter Spotify</a>
+  </nav>
 </header>
 <main>
+  <router-outlet></router-outlet>
   <app-search *ngIf="isLoggedIn"></app-search>
   <app-queue></app-queue>
-  <router-outlet></router-outlet>
 </main>
 <footer>
   <p>
@@ -24,6 +19,8 @@
     </a>
     <br />
     Un très grand merci à Théo Charlot pour le design ✏️
+    <br />
+    Connecté en tant que {{ username }}
     <br />
     <a *ngIf="isLoggedIn" [routerLink]="" (click)="logout()">Se déconnecter</a>
   </p>

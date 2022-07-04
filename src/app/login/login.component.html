@@ -1,10 +1,12 @@
 <h1>Prends part à la fête !</h1>
 <form [formGroup]="form" (ngSubmit)="login()">
   <p>
-    <label>Ton prénom :</label>
-    <input #input name="email" formControlName="name" />
+    <input
+      #input
+      name="email"
+      formControlName="name"
+      placeholder="Ton prénom"
+    />
   </p>
-  <p>
-    <button type="submit">C'est parti !</button>
-  </p>
+  <button type="submit">C'est parti !</button>
 </form>
