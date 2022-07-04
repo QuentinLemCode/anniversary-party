@@ -54,6 +54,9 @@ export class UserService {
   }
 
   isAdmin() {
+    if (!this.isLoggedIn) {
+      return false;
+    }
     return localStorage.getItem(LocalStorageKeys.ROLE) === 'admin';
   }
 

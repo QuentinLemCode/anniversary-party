@@ -17,7 +17,7 @@ export class QueueComponent extends UnsubscribableComponent implements OnInit {
   error = '';
 
   musicConfig: MusicComponentConfiguration = {
-    votable: true,
+    votable: this.user.isLoggedIn,
     deletable: this.user.isAdmin(),
     queueable: false,
   };
