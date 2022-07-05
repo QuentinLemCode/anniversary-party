@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminComponent } from './admin/admin/admin.component';
 import { SpotifyDeviceComponent } from './admin/spotify-device/spotify-device.component';
 import { ChallengeComponent } from './login/challenge/challenge.component';
 import { LoginComponent } from './login/login.component';
@@ -15,6 +16,11 @@ const routes: Routes = [
   {
     path: 'admin/spotify-device',
     component: SpotifyDeviceComponent,
+    canActivate: [AuthGuard, AdminGuard],
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
     canActivate: [AuthGuard, AdminGuard],
   },
   {

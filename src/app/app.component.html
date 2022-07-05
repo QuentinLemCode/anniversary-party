@@ -1,6 +1,15 @@
 <header>
   <nav *ngIf="isLoggedIn">
-    <a *ngIf="isAdmin" routerLink="/admin/spotify-device">Connecter Spotify</a>
+    <ul>
+      <li>
+        <a *ngIf="isAdmin" routerLink="/admin/spotify-device"
+          >Connecter Spotify</a
+        >
+      </li>
+      <li>
+        <a *ngIf="isAdmin" routerLink="/admin">Administration</a>
+      </li>
+    </ul>
   </nav>
 </header>
 <main>

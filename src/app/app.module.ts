@@ -17,6 +17,7 @@ import { RegisterComponent } from './login/register/register.component';
 import { MainComponent } from './main/main.component';
 import { JwtInterceptor } from './shared/jwt.interceptor';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
+import { AdminComponent } from './admin/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { NotFoundComponent } from './shared/not-found/not-found.component';
     MusicComponent,
     QueueComponent,
     SearchComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,

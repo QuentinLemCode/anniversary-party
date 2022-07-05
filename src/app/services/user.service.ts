@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { shareReplay, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { FullUser } from '../interfaces/user';
 import { UserLogin } from '../interfaces/user-login';
 
 enum LocalStorageKeys {
@@ -63,6 +64,19 @@ export class UserService {
   logout() {
     this.clearLocalStorage();
   }
+
+  getAllUsers() {
+    return this.http.get<FullUser[]>(this.userEndpoint);
+  }
+
+  unlock(id: number) {
+    return this.http.post(this.userEndpoint + '/' + id + '/unlock', {});
+  }
+
+  delete(id: number) {
+    return this.http.delete(this.userEndpoint + '/' + id);
+  }
+
   get username(): string | null {
     if (this.isLoggedIn) {
       return localStorage.getItem(LocalStorageKeys.USER);

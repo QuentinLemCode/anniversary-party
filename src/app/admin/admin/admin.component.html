@@ -1,0 +1,39 @@
+<h1>User list</h1>
+<table class="user-list">
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>name</th>
+      <th>ip</th>
+      <th>role</th>
+      <th>noIPverification</th>
+      <th>loginTries</th>
+      <th>locked</th>
+      <th>created_at</th>
+      <th>updated_at</th>
+      <th>deleted_at</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of usersList">
+      <th>{{ user.id }}</th>
+      <th>{{ user.name }}</th>
+      <th>{{ user.ip }}</th>
+      <th>{{ user.role }}</th>
+      <th>{{ user.noIPverification }}</th>
+      <th>{{ user.loginTries }}</th>
+      <th>{{ user.locked }}</th>
+      <th>{{ user.created_at }}</th>
+      <th>{{ user.updated_at }}</th>
+      <th>{{ user.deleted_at }}</th>
+      <td>
+        <button (click)="deleteUser(user.id)">Delete</button>
+        <button (click)="unlockUser(user.id)">Unlock</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h1>Vote settings</h1>
+<div></div>
