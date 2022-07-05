@@ -1,15 +1,32 @@
 <p *ngIf="error">{{ error }}</p>
 
 <div *ngIf="musicStatus; else loading">
-  <div
+  <ng-container
     *ngIf="
       musicStatus.isSpotifyAccountRegistered === true;
       else notAuthenticated
     "
   >
-    Connecté à Spotify
-    <p *ngIf="musicStatus.currentPlay?.title as title">Musique : {{ title }}</p>
-  </div>
+    <h1>Connecté à Spotify</h1>
+    <h3>
+      État du moteur de playlist :
+      {{ musicStatus.engineStarted ? "Démarré" : "Arreté" }}
+    </h3>
+    <button *ngIf="!musicStatus.engineStarted" (click)="startEngine()">
+      Démarrer
+    </button>
+    <button *ngIf="musicStatus.engineStarted" (click)="stopEngine()">
+      Arrêter
+    </button>
+    <p *ngIf="musicStatus.message">{{ musicStatus.message }}</p>
+    <h3>Musique en cours de lecture :</h3>
+    <app-music
+      *ngIf="musicStatus.currentPlay"
+      [music]="musicStatus.currentPlay"
+    ></app-music>
+    <h3>File d'attente :</h3>
+    <app-queue></app-queue>
+  </ng-container>
 </div>
 
 <ng-template #notAuthenticated>

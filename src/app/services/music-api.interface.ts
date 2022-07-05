@@ -38,6 +38,8 @@ export interface CurrentMusic {
   isSpotifyAccountRegistered: boolean;
   currentPlay?: Music | null;
   queue?: Queue[];
+  engineStarted: boolean;
+  message?: string;
 }
 
 export enum Status {

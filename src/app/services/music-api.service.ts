@@ -5,6 +5,10 @@ import { shareReplay } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { CurrentMusic, Music } from './music-api.interface';
 
+interface Control {
+  start: boolean;
+  logout?: boolean;
+}
 @Injectable({
   providedIn: 'root',
 })
@@ -37,5 +41,12 @@ export class MusicApiService {
     return this.http
       .get<CurrentMusic>(this.endpoint)
       .pipe(shareReplay(1, 5000));
+  }
+
+  setEngine(start: boolean) {
+    const body: Control = {
+      start,
+    };
+    return this.http.post<CurrentMusic>(this.endpoint, body);
   }
 }

@@ -24,6 +24,7 @@ export class SpotifyDeviceComponent implements OnInit {
     this.error = err?.error?.error || err?.error?.message;
     this.musicStatus = {
       isSpotifyAccountRegistered: err?.error?.isSpotifyAccountRegistered,
+      engineStarted: err?.error?.engineStarted,
     };
   };
 
@@ -63,6 +64,22 @@ export class SpotifyDeviceComponent implements OnInit {
     this.music.getUrlLogin().subscribe({
       next: (url) => {
         window.location.href = url;
+      },
+    });
+  }
+
+  startEngine() {
+    this.music.setEngine(true).subscribe({
+      next: (status) => {
+        this.musicStatus = status;
+      },
+    });
+  }
+
+  stopEngine() {
+    this.music.setEngine(false).subscribe({
+      next: (status) => {
+        this.musicStatus = status;
       },
     });
   }
