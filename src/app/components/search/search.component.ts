@@ -32,6 +32,8 @@ export class SearchComponent extends UnsubscribableComponent implements OnInit {
     queueable: true,
   };
   static readonly ERROR_MESSAGE = "Une erreur s'est produite, désolé 😫";
+  static readonly ALREADY_IN_QUEUE =
+    "Cette musique est déjà dans la file d'attente";
 
   constructor(
     private readonly music: MusicApiService,
@@ -81,6 +83,17 @@ export class SearchComponent extends UnsubscribableComponent implements OnInit {
   }
 
   addToQueue(music: Music) {
-    this.queue.push(music).subscribe();
+    this.queue.push(music).subscribe({
+      next: () => {
+        // TODO change icon to checkmark
+      },
+      error: (err) => {
+        if (err?.error?.cause === 'queue') {
+          this.error = SearchComponent.ALREADY_IN_QUEUE;
+        } else {
+          this.error = SearchComponent.ERROR_MESSAGE;
+        }
+      },
+    });
   }
 }
