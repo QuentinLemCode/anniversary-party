@@ -1,5 +1,9 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { QueueService } from '../services/queue.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { QueueComponent } from '../components/queue/queue.component';
+import { SearchComponent } from '../components/search/search.component';
+import { UserService } from '../services/user.service';
 
 import { MainComponent } from './main.component';
 
@@ -9,12 +13,14 @@ describe('MainComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MainComponent],
+      imports: [HttpClientTestingModule, FormsModule, ReactiveFormsModule],
+      declarations: [MainComponent, QueueComponent, SearchComponent],
       providers: [
         {
-          provide: QueueService,
+          provide: UserService,
           useValue: {
-            get: () => Promise.resolve([{ music: { id: '1' } }]),
+            isLoggedIn: true,
+            isAdmin: () => false,
           },
         },
       ],

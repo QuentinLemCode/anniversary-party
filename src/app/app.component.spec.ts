@@ -3,8 +3,6 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppComponent } from './app.component';
-import { QueueComponent } from './components/queue/queue.component';
-import { SearchComponent } from './components/search/search.component';
 import { UserService } from './services/user.service';
 
 describe('AppComponent', () => {
@@ -15,7 +13,7 @@ describe('AppComponent', () => {
         HttpClientTestingModule,
         FontAwesomeModule,
       ],
-      declarations: [AppComponent, QueueComponent, SearchComponent],
+      declarations: [AppComponent],
       providers: [
         {
           provide: UserService,

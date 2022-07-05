@@ -4,6 +4,8 @@ import { LoginComponent } from './login.component';
 import { EMPTY } from 'rxjs';
 import { Router } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { QueueComponent } from '../components/queue/queue.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -11,12 +13,13 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LoginComponent],
+      declarations: [LoginComponent, QueueComponent],
       providers: [
         {
           provide: UserService,
           useValue: {
             register: EMPTY,
+            isAdmin: () => false,
           },
         },
         {
@@ -26,7 +29,7 @@ describe('LoginComponent', () => {
           },
         },
       ],
-      imports: [FormsModule, ReactiveFormsModule],
+      imports: [FormsModule, ReactiveFormsModule, HttpClientTestingModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LoginComponent);
