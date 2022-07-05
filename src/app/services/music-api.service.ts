@@ -11,7 +11,7 @@ import { CurrentMusic, Music } from './music-api.interface';
 export class MusicApiService {
   private readonly endpoint = environment.serverUrl + 'music';
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   search(query: string): Observable<Music[]> {
     return this.http.get<Music[]>(this.endpoint + '/search', {

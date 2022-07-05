@@ -13,7 +13,7 @@ export class QueueService {
 
   private $queue = new ReplaySubject<Queue[]>(1);
 
-  constructor(private http: HttpClient) {
+  constructor(private readonly http: HttpClient) {
     this.loadQueue();
   }
 

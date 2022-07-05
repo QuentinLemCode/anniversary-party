@@ -19,7 +19,7 @@ export class UserService {
   private userEndpoint = environment.serverUrl + 'users';
   private authEndpoint = environment.serverUrl + 'auth';
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   register(name: string, challenge: string) {
     return this.http

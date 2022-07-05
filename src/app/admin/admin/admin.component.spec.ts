@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { EMPTY } from 'rxjs';
+import { UserService } from '../../services/user.service';
+import { VoteSettingsService } from '../../services/vote-settings.service';
 
 import { AdminComponent } from './admin.component';
 
@@ -8,9 +11,22 @@ describe('AdminComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminComponent ]
-    })
-    .compileComponents();
+      declarations: [AdminComponent],
+      providers: [
+        {
+          provide: UserService,
+          useValue: {
+            getAllUsers: () => EMPTY,
+          },
+        },
+        {
+          provide: VoteSettingsService,
+          useValue: {
+            getMaxVotes: () => EMPTY,
+          },
+        },
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AdminComponent);
     component = fixture.componentInstance;

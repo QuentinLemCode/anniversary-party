@@ -36,4 +36,7 @@
 </table>
 
 <h1>Vote settings</h1>
-<div></div>
+<div *ngIf="maxVote !== null">
+  <input type="number" [(ngModel)]="maxVote" />
+  <button (click)="setMaxVotes(maxVote)">Save</button>
+</div>
