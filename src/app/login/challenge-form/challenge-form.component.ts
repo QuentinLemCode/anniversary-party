@@ -46,6 +46,7 @@ export class ChallengeFormComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       this.yearInput.nativeElement.focus();
+      window.scroll({ top: 0 });
     }, 0);
   }
 
@@ -60,18 +61,21 @@ export class ChallengeFormComponent implements OnInit {
   submit() {
     const challenge = this.getChallengeCode();
     if (challenge === null) {
-      this.error = 'Vous devez choisir';
       return;
     }
     this.challengeSubmit.next(challenge);
   }
 
   getChallengeCode() {
+    if (this.form.controls.emojiControl.invalid || this.emojiValue === null) {
+      this.error = 'Vous devez choisir un emoji.';
+      return null;
+    }
     if (
-      this.emojiValue === null ||
       this.form.controls.birthYearControl.invalid ||
       this.birthYearValue === null
     ) {
+      this.error = 'Vous devez entrer votre année de naissance.';
       return null;
     }
     return this.emojiValue + this.birthYearValue;

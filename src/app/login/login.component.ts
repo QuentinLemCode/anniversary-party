@@ -29,7 +29,10 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    if (!this.name) return;
+    if (!this.name) {
+      this.error = 'Veuillez entrer votre nom.';
+      return;
+    }
     this.user.login(this.name).subscribe({
       next: () => {
         this.router.navigate(['/']);
