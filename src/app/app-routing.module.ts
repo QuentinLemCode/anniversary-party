@@ -17,7 +17,6 @@ const routes: Routes = [
     component: SpotifyDeviceComponent,
     canActivate: [AuthGuard, AdminGuard],
   },
-  { path: 'login', component: LoginComponent, canActivate: [NotAuthGuard] },
   {
     path: 'login/password',
     component: PasswordComponent,
@@ -33,6 +32,7 @@ const routes: Routes = [
     component: RegisterComponent,
     canActivate: [NotAuthGuard],
   },
+  { path: 'login', component: LoginComponent, canActivate: [NotAuthGuard] },
   { path: '', component: MainComponent, canActivate: [AuthGuard] },
   { path: '**', component: NotFoundComponent },
 ];
