@@ -16,10 +16,9 @@ export class QueueComponent extends UnsubscribableComponent implements OnInit {
   queues: Queue[] | null = null;
   loading = true;
   error = '';
-  isEngineStarted = false;
 
   musicConfig: MusicComponentConfiguration = {
-    votable: this.user.isLoggedIn && this.isEngineStarted,
+    votable: false,
     deletable: this.user.isAdmin(),
     queueable: false,
   };
@@ -56,7 +55,11 @@ export class QueueComponent extends UnsubscribableComponent implements OnInit {
       .pipe(takeUntil(this.$destroy))
       .subscribe({
         next: (status) => {
-          this.isEngineStarted = status.engineStarted;
+          this.musicConfig = {
+            votable: status.engineStarted && this.user.isLoggedIn,
+            deletable: this.user.isAdmin(),
+            queueable: false,
+          };
         },
       });
   }
