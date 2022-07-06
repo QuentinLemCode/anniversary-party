@@ -31,6 +31,14 @@ export class QueueService {
     return this.$queue.asObservable();
   }
 
+  getBacklog() {
+    return this.http.get<Queue[]>(this.endpoint + '/backlog');
+  }
+
+  pushBacklog(music: Music) {
+    return this.http.post(this.endpoint + '/backlog', music);
+  }
+
   forward(id: string | number) {
     return this.http.post(this.endpoint + '/' + id + '/forward', {}).pipe(
       tap(() => {

@@ -1,12 +1,17 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import { faForwardFast, faPlus } from '@fortawesome/free-solid-svg-icons';
+import {
+  faFolderPlus,
+  faForwardFast,
+  faPlus,
+} from '@fortawesome/free-solid-svg-icons';
 import { Music } from 'src/app/services/music-api.interface';
 
 export interface MusicComponentConfiguration {
   votable: boolean;
   deletable: boolean;
   queueable: boolean;
+  backlog: boolean;
 }
 
 @Component({
@@ -21,6 +26,7 @@ export class MusicComponent implements OnInit {
         votable: false,
         deletable: false,
         queueable: false,
+        backlog: false,
       };
     }
   }
@@ -45,7 +51,11 @@ export class MusicComponent implements OnInit {
   @Output()
   addToQueue = new EventEmitter<void>();
 
+  @Output()
+  addToBacklog = new EventEmitter<void>();
+
   faTrash = faTrashCan;
   faForward = faForwardFast;
   faAdd = faPlus;
+  faFolderPlus = faFolderPlus;
 }

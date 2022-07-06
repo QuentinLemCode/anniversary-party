@@ -18,6 +18,7 @@ import { MainComponent } from './main/main.component';
 import { JwtInterceptor } from './shared/jwt.interceptor';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { AdminComponent } from './admin/admin/admin.component';
+import { BacklogComponent } from './components/backlog/backlog.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { AdminComponent } from './admin/admin/admin.component';
     QueueComponent,
     SearchComponent,
     AdminComponent,
+    BacklogComponent,
   ],
   imports: [
     BrowserModule,

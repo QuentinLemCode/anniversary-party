@@ -1,0 +1,11 @@
+<p *ngIf="loading">Chargement ...</p>
+<p *ngIf="error">{{ error }}</p>
+
+<ng-container *ngIf="queues !== null">
+  <app-music
+    *ngFor="let queue of queues"
+    [music]="queue.music"
+    [config]="musicConfig"
+    (delete)="delete(queue.id)"
+  ></app-music>
+</ng-container>

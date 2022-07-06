@@ -13,6 +13,7 @@ import {
 import { Music } from '../../services/music-api.interface';
 import { MusicApiService } from '../../services/music-api.service';
 import { QueueService } from '../../services/queue.service';
+import { UserService } from '../../services/user.service';
 import { UnsubscribableComponent } from '../../utils/unsubscribable-component';
 import { MusicComponentConfiguration } from '../music/music.component';
 
@@ -30,6 +31,7 @@ export class SearchComponent extends UnsubscribableComponent implements OnInit {
     votable: false,
     deletable: false,
     queueable: true,
+    backlog: this.user.isAdmin(),
   };
   static readonly ERROR_MESSAGE = "Une erreur s'est produite, désolé 😫";
   static readonly ALREADY_IN_QUEUE =
@@ -37,7 +39,8 @@ export class SearchComponent extends UnsubscribableComponent implements OnInit {
 
   constructor(
     private readonly music: MusicApiService,
-    private readonly queue: QueueService
+    private readonly queue: QueueService,
+    private readonly user: UserService
   ) {
     super();
   }
@@ -95,5 +98,9 @@ export class SearchComponent extends UnsubscribableComponent implements OnInit {
         }
       },
     });
+  }
+
+  addToBacklog(music: Music) {
+    this.queue.pushBacklog(music).subscribe();
   }
 }

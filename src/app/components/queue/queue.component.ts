@@ -21,6 +21,7 @@ export class QueueComponent extends UnsubscribableComponent implements OnInit {
     votable: false,
     deletable: this.user.isAdmin(),
     queueable: false,
+    backlog: false,
   };
 
   constructor(
@@ -59,6 +60,7 @@ export class QueueComponent extends UnsubscribableComponent implements OnInit {
             votable: status.engineStarted && this.user.isLoggedIn,
             deletable: this.user.isAdmin(),
             queueable: false,
+            backlog: false,
           };
         },
       });

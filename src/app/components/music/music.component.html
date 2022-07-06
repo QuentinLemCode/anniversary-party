@@ -23,4 +23,9 @@
       <fa-icon [icon]="faAdd"></fa-icon>
     </button>
   </div>
+  <div class="add-to-backlog" *ngIf="config?.backlog">
+    <button (click)="addToBacklog.emit()">
+      <fa-icon [icon]="faFolderPlus"></fa-icon>
+    </button>
+  </div>
 </ng-container>
