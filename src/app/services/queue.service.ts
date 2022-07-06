@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
+import { ReplaySubject, Subscription, timer } from 'rxjs';
 import { first, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { Music, Queue } from './music-api.interface';
@@ -11,10 +11,12 @@ import { Music, Queue } from './music-api.interface';
 export class QueueService {
   private readonly endpoint = environment.serverUrl + 'queue';
 
-  private $queue = new ReplaySubject<Queue[]>(1);
+  private readonly $queue = new ReplaySubject<Queue[]>(1);
+
+  private $polling?: Subscription;
 
   constructor(private readonly http: HttpClient) {
-    this.loadQueue();
+    this.launchPolling();
   }
 
   push(music: Music) {
@@ -50,6 +52,16 @@ export class QueueService {
         });
       })
     );
+  }
+
+  launchPolling() {
+    this.$polling = timer(0, 10000).subscribe(() => {
+      this.loadQueue();
+    });
+  }
+
+  stopPolling() {
+    this.$polling?.unsubscribe();
   }
 
   private loadQueue() {

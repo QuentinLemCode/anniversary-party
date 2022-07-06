@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { takeUntil, tap } from 'rxjs/operators';
 import { Queue } from '../../services/music-api.interface';
+import { MusicApiService } from '../../services/music-api.service';
 import { QueueService } from '../../services/queue.service';
 import { UserService } from '../../services/user.service';
 import { UnsubscribableComponent } from '../../utils/unsubscribable-component';
@@ -15,16 +16,18 @@ export class QueueComponent extends UnsubscribableComponent implements OnInit {
   queues: Queue[] | null = null;
   loading = true;
   error = '';
+  isEngineStarted = false;
 
   musicConfig: MusicComponentConfiguration = {
-    votable: this.user.isLoggedIn,
+    votable: this.user.isLoggedIn && this.isEngineStarted,
     deletable: this.user.isAdmin(),
     queueable: false,
   };
 
   constructor(
     private readonly queue: QueueService,
-    private readonly user: UserService
+    private readonly user: UserService,
+    private readonly music: MusicApiService
   ) {
     super();
   }
@@ -47,6 +50,15 @@ export class QueueComponent extends UnsubscribableComponent implements OnInit {
           this.error = "Erreur lors de l'obtention de la file d'attente";
         },
       });
+
+    this.music
+      .getStatus()
+      .pipe(takeUntil(this.$destroy))
+      .subscribe({
+        next: (status) => {
+          this.isEngineStarted = status.engineStarted;
+        },
+      });
   }
 
   delete(id: number) {
@@ -54,6 +66,13 @@ export class QueueComponent extends UnsubscribableComponent implements OnInit {
   }
 
   vote(id: number) {
-    this.queue.forward(id).subscribe();
+    this.queue.forward(id).subscribe({
+      error: (error) => {
+        if (error?.error?.cause === 'already-voted') {
+          this.error = 'Vous avez déjà voté pour cette musique';
+          setTimeout(() => (this.error = ''), 5000);
+        }
+      },
+    });
   }
 }

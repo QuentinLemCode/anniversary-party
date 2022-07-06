@@ -10,6 +10,7 @@
   <div class="vote" *ngIf="config?.votable">
     <button (click)="vote.emit()">
       <fa-icon [icon]="faForward"></fa-icon>
+      <div class="vote-count" *ngIf="voteCount > 0">{{ voteCount }}</div>
     </button>
   </div>
   <div class="remove" *ngIf="config?.deletable">

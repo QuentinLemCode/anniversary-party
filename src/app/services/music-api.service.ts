@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { CurrentMusic, Music } from './music-api.interface';
@@ -15,7 +15,14 @@ interface Control {
 export class MusicApiService {
   private readonly endpoint = environment.serverUrl + 'music';
 
-  constructor(private readonly http: HttpClient) {}
+  private readonly $status = new ReplaySubject<CurrentMusic>(1);
+
+  constructor(private readonly http: HttpClient) {
+    this.loadStatus();
+    setInterval(() => {
+      this.loadStatus();
+    }, 5000);
+  }
 
   search(query: string): Observable<Music[]> {
     return this.http.get<Music[]>(this.endpoint + '/search', {
@@ -38,9 +45,7 @@ export class MusicApiService {
   }
 
   getStatus() {
-    return this.http
-      .get<CurrentMusic>(this.endpoint)
-      .pipe(shareReplay(1, 5000));
+    return this.$status.asObservable();
   }
 
   setEngine(start: boolean) {
@@ -48,5 +53,16 @@ export class MusicApiService {
       start,
     };
     return this.http.post<CurrentMusic>(this.endpoint, body);
+  }
+
+  private loadStatus() {
+    this.http.get<CurrentMusic>(this.endpoint).subscribe({
+      next: (status) => {
+        this.$status.next(status);
+      },
+      error: (err) => {
+        this.$status.error(err);
+      },
+    });
   }
 }

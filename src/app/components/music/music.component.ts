@@ -31,6 +31,9 @@ export class MusicComponent implements OnInit {
   music?: Music;
 
   @Input()
+  voteCount = 0;
+
+  @Input()
   config?: MusicComponentConfiguration;
 
   @Output()

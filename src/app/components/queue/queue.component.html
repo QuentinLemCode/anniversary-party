@@ -1,5 +1,5 @@
 <p *ngIf="loading">Chargement ...</p>
-<p *ngIf="error">Erreur</p>
+<p *ngIf="error">{{ error }}</p>
 
 <ng-container *ngIf="queues !== null">
   <app-music
@@ -9,5 +9,6 @@
     [config]="musicConfig"
     (delete)="delete(queue.id)"
     (vote)="vote(queue.id)"
+    [voteCount]="queue.forward_votes"
   ></app-music>
 </ng-container>
