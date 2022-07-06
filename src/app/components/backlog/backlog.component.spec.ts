@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { EMPTY } from 'rxjs';
+import { QueueService } from '../../services/queue.service';
 
 import { BacklogComponent } from './backlog.component';
 
@@ -9,6 +11,14 @@ describe('BacklogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [BacklogComponent],
+      providers: [
+        {
+          provide: QueueService,
+          useValue: {
+            getBacklog: () => EMPTY,
+          },
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(BacklogComponent);
