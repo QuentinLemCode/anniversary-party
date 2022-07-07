@@ -12,6 +12,7 @@ import { SettingsService } from '../../services/settings.service';
 export class AdminComponent implements OnInit {
   usersList: FullUser[] = [];
   maxVote: number | null = null;
+  maxQueuableSongs: number | null = null;
 
   constructor(
     private readonly users: UserService,
@@ -24,9 +25,10 @@ export class AdminComponent implements OnInit {
         this.usersList = users;
       },
     });
-    this.settings.getMaxVotes().subscribe({
-      next: (vote) => {
-        this.maxVote = vote.maxVotes;
+    this.settings.get().subscribe({
+      next: (setting) => {
+        this.maxVote = setting.maxVotes;
+        this.maxQueuableSongs = setting.maxQueuableSongPerUser;
       },
     });
   }
@@ -54,9 +56,17 @@ export class AdminComponent implements OnInit {
   }
 
   setMaxVotes(value: number) {
-    this.settings.setMaxVotes(value).subscribe({
+    this.settings.setMaxVote(value).subscribe({
       next: (vote) => {
         this.maxVote = vote.maxVotes;
+      },
+    });
+  }
+
+  setMaxQueuableSongs(value: number) {
+    this.settings.setMaxQueuableSongPerUser(value).subscribe({
+      next: (vote) => {
+        this.maxQueuableSongs = vote.maxQueuableSongPerUser;
       },
     });
   }

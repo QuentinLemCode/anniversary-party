@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 
 export interface SettingsQuery {
   maxVotes: number;
+  maxQueuableSongPerUser: number;
 }
 
 @Injectable({
@@ -14,13 +15,20 @@ export class SettingsService {
 
   constructor(private readonly http: HttpClient) {}
 
-  getMaxVotes() {
+  get() {
     return this.http.get<SettingsQuery>(this.endpoint);
   }
 
-  setMaxVotes(value: number) {
-    const body: SettingsQuery = {
+  setMaxVote(value: number) {
+    const body: Partial<SettingsQuery> = {
       maxVotes: value,
+    };
+    return this.http.put<SettingsQuery>(this.endpoint, body);
+  }
+
+  setMaxQueuableSongPerUser(value: number) {
+    const body: Partial<SettingsQuery> = {
+      maxQueuableSongPerUser: value,
     };
     return this.http.put<SettingsQuery>(this.endpoint, body);
   }
