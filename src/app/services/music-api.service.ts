@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, ReplaySubject } from 'rxjs';
+import { Observable, ReplaySubject, Subscription, timer } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { CurrentMusic, Music } from './music-api.interface';
+import { VisibilityService } from './visibility.service';
 
 interface Control {
   start: boolean;
@@ -17,11 +18,21 @@ export class MusicApiService {
 
   private readonly $status = new ReplaySubject<CurrentMusic>(1);
 
-  constructor(private readonly http: HttpClient) {
-    this.loadStatus();
-    setInterval(() => {
-      this.loadStatus();
-    }, 5000);
+  private $polling?: Subscription;
+
+  constructor(
+    private readonly http: HttpClient,
+    readonly visibility: VisibilityService
+  ) {
+    visibility.change.subscribe({
+      next: (status) => {
+        if (status.visible) {
+          this.launchPolling();
+        } else {
+          this.stopPolling();
+        }
+      },
+    });
   }
 
   search(query: string): Observable<Music[]> {
@@ -53,6 +64,17 @@ export class MusicApiService {
       start,
     };
     return this.http.post<CurrentMusic>(this.endpoint, body);
+  }
+
+  private launchPolling() {
+    if (this.$polling && !this.$polling.closed) return;
+    this.$polling = timer(0, 5000).subscribe(() => {
+      this.loadStatus();
+    });
+  }
+
+  private stopPolling() {
+    this.$polling?.unsubscribe();
   }
 
   private loadStatus() {

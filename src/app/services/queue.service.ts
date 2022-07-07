@@ -4,6 +4,7 @@ import { ReplaySubject, Subscription, timer } from 'rxjs';
 import { first, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { Music, Queue } from './music-api.interface';
+import { VisibilityService } from './visibility.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,8 +16,19 @@ export class QueueService {
 
   private $polling?: Subscription;
 
-  constructor(private readonly http: HttpClient) {
-    this.launchPolling();
+  constructor(
+    private readonly http: HttpClient,
+    readonly visibility: VisibilityService
+  ) {
+    this.visibility.change.subscribe({
+      next: (status) => {
+        if (status.visible) {
+          this.launchPolling();
+        } else {
+          this.stopPolling();
+        }
+      },
+    });
   }
 
   push(music: Music) {
@@ -62,13 +74,14 @@ export class QueueService {
     );
   }
 
-  launchPolling() {
+  private launchPolling() {
+    if (this.$polling && !this.$polling.closed) return;
     this.$polling = timer(0, 10000).subscribe(() => {
       this.loadQueue();
     });
   }
 
-  stopPolling() {
+  private stopPolling() {
     this.$polling?.unsubscribe();
   }
 
