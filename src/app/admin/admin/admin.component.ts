@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { mergeMap } from 'rxjs/operators';
 import { FullUser } from '../../interfaces/user';
 import { UserService } from '../../services/user.service';
-import { VoteSettingsService } from '../../services/vote-settings.service';
+import { SettingsService } from '../../services/settings.service';
 
 @Component({
   selector: 'app-admin',
@@ -15,7 +15,7 @@ export class AdminComponent implements OnInit {
 
   constructor(
     private readonly users: UserService,
-    private readonly votes: VoteSettingsService
+    private readonly settings: SettingsService
   ) {}
 
   ngOnInit(): void {
@@ -24,7 +24,7 @@ export class AdminComponent implements OnInit {
         this.usersList = users;
       },
     });
-    this.votes.getMaxVotes().subscribe({
+    this.settings.getMaxVotes().subscribe({
       next: (vote) => {
         this.maxVote = vote.maxVotes;
       },
@@ -54,7 +54,7 @@ export class AdminComponent implements OnInit {
   }
 
   setMaxVotes(value: number) {
-    this.votes.setMaxVotes(value).subscribe({
+    this.settings.setMaxVotes(value).subscribe({
       next: (vote) => {
         this.maxVote = vote.maxVotes;
       },

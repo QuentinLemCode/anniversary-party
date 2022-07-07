@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { EMPTY } from 'rxjs';
 import { UserService } from '../../services/user.service';
-import { VoteSettingsService } from '../../services/vote-settings.service';
+import { SettingsService } from '../../services/settings.service';
 
 import { AdminComponent } from './admin.component';
 
@@ -20,7 +20,7 @@ describe('AdminComponent', () => {
           },
         },
         {
-          provide: VoteSettingsService,
+          provide: SettingsService,
           useValue: {
             getMaxVotes: () => EMPTY,
           },

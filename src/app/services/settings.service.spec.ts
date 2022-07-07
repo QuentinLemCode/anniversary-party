@@ -1,16 +1,16 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
-import { VoteSettingsService } from './vote-settings.service';
+import { SettingsService } from './settings.service';
 
-describe('VoteSettingsService', () => {
-  let service: VoteSettingsService;
+describe('SettingsService', () => {
+  let service: SettingsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
     });
-    service = TestBed.inject(VoteSettingsService);
+    service = TestBed.inject(SettingsService);
   });
 
   it('should be created', () => {
