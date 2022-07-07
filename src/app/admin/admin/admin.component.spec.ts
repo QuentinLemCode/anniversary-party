@@ -22,7 +22,7 @@ describe('AdminComponent', () => {
         {
           provide: SettingsService,
           useValue: {
-            getMaxVotes: () => EMPTY,
+            get: () => EMPTY,
           },
         },
       ],
