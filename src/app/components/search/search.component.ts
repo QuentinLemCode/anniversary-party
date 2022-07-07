@@ -45,9 +45,7 @@ export class SearchComponent extends UnsubscribableComponent implements OnInit {
     super();
   }
 
-  // TODO limit to 5 (or variable) music per user
   // TODO implement music backlog
-  // TODO check if music has already been added
   ngOnInit(): void {
     this.search.valueChanges
       .pipe(
@@ -90,12 +88,19 @@ export class SearchComponent extends UnsubscribableComponent implements OnInit {
       next: () => {
         // TODO change icon to checkmark
       },
-      error: (err) => {
-        if (err?.error?.cause === 'queue') {
+      error: (error) => {
+        if (error?.error?.cause === 'queue') {
           this.error = SearchComponent.ALREADY_IN_QUEUE;
         } else {
           this.error = SearchComponent.ERROR_MESSAGE;
         }
+        if (error?.error?.cause === 'queue-limit') {
+          const queueLimit = error?.error?.limit;
+          this.error = `Vous avez déjà ${
+            queueLimit || 'plusieurs'
+          } musiques dans la file d'attente. Veuillez attendre qu'elle soient terminées ou les supprimer pour en ajouter d'autres.`;
+        }
+        setTimeout(() => (this.error = ''), 5000);
       },
     });
   }
