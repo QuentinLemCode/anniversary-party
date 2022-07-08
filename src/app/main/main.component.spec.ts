@@ -1,6 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { QueueComponent } from '../components/queue/queue.component';
 import { SearchComponent } from '../components/search/search.component';
 import { UserService } from '../services/user.service';
@@ -13,7 +14,12 @@ describe('MainComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, FormsModule, ReactiveFormsModule],
+      imports: [
+        HttpClientTestingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        FontAwesomeModule,
+      ],
       declarations: [MainComponent, QueueComponent, SearchComponent],
       providers: [
         {

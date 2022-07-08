@@ -15,7 +15,7 @@ describe('BacklogComponent', () => {
         {
           provide: QueueService,
           useValue: {
-            getBacklog: () => EMPTY,
+            getFullBacklog: () => EMPTY,
           },
         },
       ],
