@@ -6,7 +6,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-challenge-form',
@@ -20,15 +20,16 @@ export class ChallengeFormComponent implements OnInit {
   private static readonly EMOJIS = [
     { emoji: '😂', description: 'Face with tears of joy' },
     { emoji: '❤️', description: 'Red heart' },
-    { emoji: '🤣', description: 'Rolling on the floor laughing' },
+    { emoji: '💣', description: 'Bomb' },
     { emoji: '👍', description: 'Thumbs up' },
-    { emoji: '😭', description: 'Loudly crying face' },
-    { emoji: '🙏', description: 'Folded hands' },
-    { emoji: '😘', description: 'Face blowing a kiss' },
-    { emoji: '🥰', description: 'Smiling face with hearts' },
-    { emoji: '😍', description: 'Smiling face with heart-eyes' },
-    { emoji: '😊', description: 'Smiling face with smiling eyes' },
+    { emoji: '🥁', description: 'Drum' },
+    { emoji: '💻', description: 'Laptop' },
+    { emoji: '🌍', description: 'Globe' },
+    { emoji: '🎂', description: 'Birthday cake' },
+    { emoji: '🍪', description: 'Cookie' },
     { emoji: '🔥', description: 'Fire' },
+    { emoji: '🏨', description: 'Hotel' },
+    { emoji: '🍔', description: 'Hamburger' },
   ];
 
   emojis = this.shuffleEmoji(ChallengeFormComponent.EMOJIS);
@@ -37,7 +38,9 @@ export class ChallengeFormComponent implements OnInit {
 
   form = new FormGroup({
     emojiControl: new FormControl(''),
-    birthYearControl: new FormControl(''),
+    birthYearControl: new FormControl('', {
+      validators: [Validators.max(2020), Validators.min(1900)],
+    }),
   });
 
   @ViewChild('input')
