@@ -3,6 +3,7 @@
   [formControl]="search"
   placeholder="Rechercher une musique"
 />
+<span class="search-icon"><fa-icon [icon]="iconSearch"></fa-icon></span>
 
 <p *ngIf="loading">Chargement ...</p>
 <p *ngIf="error">{{ error }}</p>

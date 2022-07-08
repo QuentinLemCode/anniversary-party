@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { faAdd, faCheck, faCross } from '@fortawesome/free-solid-svg-icons';
+import {
+  faAdd,
+  faCheck,
+  faCross,
+  faSearch,
+} from '@fortawesome/free-solid-svg-icons';
 import { of } from 'rxjs';
 import {
   catchError,
@@ -37,6 +42,7 @@ export class SearchComponent extends UnsubscribableComponent implements OnInit {
     queueable: true,
     backlog: this.user.isAdmin(),
   };
+  iconSearch = faSearch;
   static readonly ERROR_MESSAGE = "Une erreur s'est produite, désolé 😫";
   static readonly ALREADY_IN_QUEUE =
     "Cette musique est déjà dans la file d'attente";
