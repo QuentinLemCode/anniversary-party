@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ReplaySubject, Subscription, timer } from 'rxjs';
 import { first, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-import { Music, Queue } from './music-api.interface';
+import { Backlog, Music, Queue } from './music-api.interface';
 import { VisibilityService } from './visibility.service';
 
 @Injectable({
@@ -44,7 +44,7 @@ export class QueueService {
   }
 
   getBacklog() {
-    return this.http.get<Queue[]>(this.endpoint + '/backlog');
+    return this.http.get<Backlog[]>(this.endpoint + '/backlog');
   }
 
   pushBacklog(music: Music) {
@@ -72,6 +72,10 @@ export class QueueService {
         });
       })
     );
+  }
+
+  deleteBacklog(id: string | number) {
+    return this.http.delete(this.endpoint + '/backlog/' + id);
   }
 
   private launchPolling() {

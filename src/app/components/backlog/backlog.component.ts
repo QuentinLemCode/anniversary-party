@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { mergeMap, takeUntil, tap } from 'rxjs/operators';
-import { Queue } from '../../services/music-api.interface';
+import { Backlog } from '../../services/music-api.interface';
 import { QueueService } from '../../services/queue.service';
 import { UnsubscribableComponent } from '../../utils/unsubscribable-component';
 import { MusicComponentConfiguration } from '../music/music.component';
@@ -14,7 +14,7 @@ export class BacklogComponent
   extends UnsubscribableComponent
   implements OnInit
 {
-  queues: Queue[] | null = null;
+  backlog: Backlog[] | null = null;
   loading = true;
   error = '';
 
@@ -37,8 +37,8 @@ export class BacklogComponent
         tap(() => (this.error = ''))
       )
       .subscribe({
-        next: (queue) => {
-          this.queues = queue;
+        next: (backlog) => {
+          this.backlog = backlog;
           this.loading = false;
         },
         error: (error) => {
@@ -51,11 +51,11 @@ export class BacklogComponent
 
   delete(id: number) {
     this.queue
-      .delete(id)
+      .deleteBacklog(id)
       .pipe(mergeMap(() => this.queue.getBacklog()))
       .subscribe({
         next: (queue) => {
-          this.queues = queue;
+          this.backlog = queue;
         },
       });
   }

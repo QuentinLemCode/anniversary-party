@@ -58,3 +58,8 @@ export interface Queue {
   };
   forward_votes: number;
 }
+
+export interface Backlog {
+  music: Music;
+  id: number;
+}
