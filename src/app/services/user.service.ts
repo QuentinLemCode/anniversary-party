@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { shareReplay, tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { throwError } from 'rxjs';
+import { catchError, finalize, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { FullUser } from '../interfaces/user';
 import { UserLogin } from '../interfaces/user-login';
@@ -10,6 +12,8 @@ enum LocalStorageKeys {
   USER = 'user',
   EXPIRES_AT = 'expires_at',
   ROLE = 'role',
+  REFRESH_TOKEN = 'refresh_token',
+  USER_ID = 'user_id',
 }
 
 @Injectable({
@@ -19,7 +23,7 @@ export class UserService {
   private userEndpoint = environment.serverUrl + 'users';
   private authEndpoint = environment.serverUrl + 'auth';
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly http: HttpClient, private router: Router) {}
 
   register(name: string, challenge: string) {
     return this.http
@@ -62,7 +66,14 @@ export class UserService {
   }
 
   logout() {
-    this.clearLocalStorage();
+    return this.http
+      .post(this.authEndpoint + '/logout/' + this.userId, '')
+      .pipe(
+        finalize(() => {
+          this.clearLocalStorage();
+          this.router.navigate(['/login']);
+        })
+      );
   }
 
   getAllUsers() {
@@ -77,6 +88,20 @@ export class UserService {
     return this.http.delete(this.userEndpoint + '/' + id);
   }
 
+  refreshToken() {
+    const body = {
+      token: this.savedRefreshToken,
+    };
+    return this.http.post<UserLogin>(this.authEndpoint + '/refresh', body).pipe(
+      tap((login) => this.saveLogin(login)),
+      catchError((err) => {
+        this.clearLocalStorage();
+        this.router.navigate(['/login']);
+        return throwError(err);
+      })
+    );
+  }
+
   get username(): string | null {
     if (this.isLoggedIn) {
       return localStorage.getItem(LocalStorageKeys.USER);
@@ -84,10 +109,11 @@ export class UserService {
     return null;
   }
 
+  get userId(): string | null {
+    return localStorage.getItem(LocalStorageKeys.USER_ID);
+  }
+
   get isLoggedIn(): boolean {
-    if (this.isTokenExpired()) {
-      return false;
-    }
     const authToken = this.getToken();
     return authToken !== null ? true : false;
   }
@@ -100,6 +126,10 @@ export class UserService {
     return +lsItem;
   }
 
+  get savedRefreshToken(): string | null {
+    return localStorage.getItem(LocalStorageKeys.REFRESH_TOKEN);
+  }
+
   private now() {
     return Math.floor(Date.now() / 1000);
   }
@@ -109,6 +139,8 @@ export class UserService {
     localStorage.setItem(LocalStorageKeys.EXPIRES_AT, '' + login.expires_at);
     localStorage.setItem(LocalStorageKeys.TOKEN, login.access_token);
     localStorage.setItem(LocalStorageKeys.ROLE, login.role);
+    localStorage.setItem(LocalStorageKeys.REFRESH_TOKEN, login.refresh_token);
+    localStorage.setItem(LocalStorageKeys.USER_ID, '' + login.id);
   }
 
   private clearLocalStorage() {
@@ -125,7 +157,6 @@ export class UserService {
         challenge,
       })
       .pipe(
-        shareReplay(1),
         tap((token) => {
           this.saveLogin(token);
         })

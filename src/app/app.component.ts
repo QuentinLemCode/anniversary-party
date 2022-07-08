@@ -36,7 +36,10 @@ export class AppComponent {
   }
 
   logout() {
-    this.user.logout();
-    this.router.navigate(['/login'], { replaceUrl: true });
+    this.user.logout().subscribe({
+      next: () => {
+        this.router.navigate(['/login'], { replaceUrl: true });
+      },
+    });
   }
 }
