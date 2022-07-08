@@ -11,24 +11,39 @@
     </div>
   </div>
   <div class="vote" *ngIf="config?.votable">
-    <button (click)="vote.emit()">
-      <fa-icon [icon]="faForward"></fa-icon>
-      <div class="vote-count" *ngIf="voteCount > 0">{{ voteCount }}</div>
+    <button (click)="vote.emit(updateStatusDelete)">
+      <fa-icon [icon]="iconForward"></fa-icon>
+      <div
+        class="vote-count"
+        *ngIf="voteCount > 0"
+        [ngClass]="loadingDelete ? ['fa-beat-fade'] : []"
+      >
+        {{ voteCount }}
+      </div>
     </button>
   </div>
   <div class="remove" *ngIf="config?.deletable">
-    <button (click)="delete.emit()">
-      <fa-icon [icon]="faTrash"></fa-icon>
+    <button (click)="delete.emit(updateStatusForward)">
+      <fa-icon
+        [icon]="iconDelete"
+        [ngClass]="loadingForward ? ['fa-beat-fade'] : []"
+      ></fa-icon>
     </button>
   </div>
   <div class="add-to-queue" *ngIf="config?.queueable">
-    <button (click)="addToQueue.emit()">
-      <fa-icon [icon]="faAdd"></fa-icon>
+    <button (click)="addToQueue.emit(updateStatusAdd)">
+      <fa-icon
+        [icon]="iconAdd"
+        [ngClass]="loadingAdd ? ['fa-beat-fade'] : []"
+      ></fa-icon>
     </button>
   </div>
   <div class="add-to-backlog" *ngIf="config?.backlog">
-    <button (click)="addToBacklog.emit()">
-      <fa-icon [icon]="faFolderPlus"></fa-icon>
+    <button (click)="addToBacklog.emit(updateStatusBacklog)">
+      <fa-icon
+        [icon]="iconBacklog"
+        [ngClass]="loadingBacklog ? ['fa-beat-fade'] : []"
+      ></fa-icon>
     </button>
   </div>
 </ng-container>

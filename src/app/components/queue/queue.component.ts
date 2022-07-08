@@ -5,7 +5,10 @@ import { MusicApiService } from '../../services/music-api.service';
 import { QueueService } from '../../services/queue.service';
 import { UserService } from '../../services/user.service';
 import { UnsubscribableComponent } from '../../utils/unsubscribable-component';
-import { MusicComponentConfiguration } from '../music/music.component';
+import {
+  IconUpdateStatus,
+  MusicComponentConfiguration,
+} from '../music/music.component';
 
 @Component({
   selector: 'app-queue',
@@ -80,13 +83,28 @@ export class QueueComponent extends UnsubscribableComponent implements OnInit {
       });
   }
 
-  delete(id: number) {
-    this.queue.delete(id).subscribe();
+  delete(id: number, iconUpdate: IconUpdateStatus) {
+    iconUpdate.updateLoading(true);
+    this.queue.delete(id).subscribe({
+      next: () => {
+        iconUpdate.updateLoading(false);
+        iconUpdate.completeEmitter();
+      },
+      error: () => {
+        iconUpdate.updateLoading(false);
+      },
+    });
   }
 
-  vote(id: number) {
+  vote(id: number, iconUpdate: IconUpdateStatus) {
+    iconUpdate.updateLoading(true);
     this.queue.forward(id).subscribe({
+      next: () => {
+        iconUpdate.updateLoading(false);
+        iconUpdate.completeEmitter();
+      },
       error: (error) => {
+        iconUpdate.updateLoading(false);
         if (error?.error?.cause === 'already-voted') {
           this.error = 'Vous avez déjà voté pour cette musique';
           setTimeout(() => (this.error = ''), 5000);

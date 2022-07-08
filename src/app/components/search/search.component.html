@@ -12,7 +12,7 @@
     *ngFor="let music of results"
     [music]="music"
     [config]="musicConfig"
-    (addToQueue)="addToQueue(music)"
-    (addToBacklog)="addToBacklog(music)"
+    (addToQueue)="addToQueue(music, $event)"
+    (addToBacklog)="addToBacklog(music, $event)"
   ></app-music>
 </div>

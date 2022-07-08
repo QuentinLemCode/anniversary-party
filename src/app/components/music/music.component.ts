@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import {
+  faTrashCan,
+  IconDefinition,
+} from '@fortawesome/free-regular-svg-icons';
 import {
   faFolderPlus,
   faForwardFast,
@@ -14,12 +17,49 @@ export interface MusicComponentConfiguration {
   backlog: boolean;
 }
 
+export interface IconUpdateStatus {
+  updateLoading: (loading: boolean) => void;
+  updateIcon: (icon: IconDefinition) => void;
+  completeEmitter: () => void;
+}
+
 @Component({
   selector: 'app-music',
   templateUrl: './music.component.html',
   styleUrls: ['./music.component.scss'],
 })
 export class MusicComponent implements OnInit {
+  iconDelete = faTrashCan;
+  iconForward = faForwardFast;
+  iconAdd = faPlus;
+  iconBacklog = faFolderPlus;
+
+  loadingDelete = false;
+  loadingForward = false;
+  loadingAdd = false;
+  loadingBacklog = false;
+
+  updateStatusDelete: IconUpdateStatus = {
+    updateLoading: (loading) => (this.loadingDelete = loading),
+    updateIcon: (icon) => (this.iconDelete = icon),
+    completeEmitter: () => this.delete.complete(),
+  };
+  updateStatusForward: IconUpdateStatus = {
+    updateLoading: (loading) => (this.loadingForward = loading),
+    updateIcon: (icon) => (this.iconForward = icon),
+    completeEmitter: () => this.vote.complete(),
+  };
+  updateStatusAdd: IconUpdateStatus = {
+    updateLoading: (loading) => (this.loadingAdd = loading),
+    updateIcon: (icon) => (this.iconAdd = icon),
+    completeEmitter: () => this.addToQueue.complete(),
+  };
+  updateStatusBacklog: IconUpdateStatus = {
+    updateLoading: (loading) => (this.loadingBacklog = loading),
+    updateIcon: (icon) => (this.iconBacklog = icon),
+    completeEmitter: () => this.addToBacklog.complete(),
+  };
+
   ngOnInit(): void {
     if (!this.config) {
       this.config = {
@@ -29,6 +69,7 @@ export class MusicComponent implements OnInit {
         backlog: false,
       };
     }
+    this.addToQueue.complete();
   }
   @Input()
   username?: string;
@@ -46,19 +87,14 @@ export class MusicComponent implements OnInit {
   backlog = false;
 
   @Output()
-  vote = new EventEmitter<void>();
+  vote = new EventEmitter<IconUpdateStatus>();
 
   @Output()
-  delete = new EventEmitter<void>();
+  delete = new EventEmitter<IconUpdateStatus>();
 
   @Output()
-  addToQueue = new EventEmitter<void>();
+  addToQueue = new EventEmitter<IconUpdateStatus>();
 
   @Output()
-  addToBacklog = new EventEmitter<void>();
-
-  faTrash = faTrashCan;
-  faForward = faForwardFast;
-  faAdd = faPlus;
-  faFolderPlus = faFolderPlus;
+  addToBacklog = new EventEmitter<IconUpdateStatus>();
 }

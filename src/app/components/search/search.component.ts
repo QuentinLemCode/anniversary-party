@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { faAdd, faCheck, faCross } from '@fortawesome/free-solid-svg-icons';
 import { of } from 'rxjs';
 import {
   catchError,
@@ -15,7 +16,10 @@ import { MusicApiService } from '../../services/music-api.service';
 import { QueueService } from '../../services/queue.service';
 import { UserService } from '../../services/user.service';
 import { UnsubscribableComponent } from '../../utils/unsubscribable-component';
-import { MusicComponentConfiguration } from '../music/music.component';
+import {
+  IconUpdateStatus,
+  MusicComponentConfiguration,
+} from '../music/music.component';
 
 @Component({
   selector: 'app-search',
@@ -36,6 +40,7 @@ export class SearchComponent extends UnsubscribableComponent implements OnInit {
   static readonly ERROR_MESSAGE = "Une erreur s'est produite, désolé 😫";
   static readonly ALREADY_IN_QUEUE =
     "Cette musique est déjà dans la file d'attente";
+  static readonly ALREADY_IN_BACKLOG = 'Cette musique est déjà dans le backlog';
 
   constructor(
     private readonly music: MusicApiService,
@@ -45,7 +50,6 @@ export class SearchComponent extends UnsubscribableComponent implements OnInit {
     super();
   }
 
-  // TODO implement music backlog
   ngOnInit(): void {
     this.search.valueChanges
       .pipe(
@@ -83,29 +87,57 @@ export class SearchComponent extends UnsubscribableComponent implements OnInit {
       });
   }
 
-  addToQueue(music: Music) {
+  addToQueue(music: Music, updateIcon: IconUpdateStatus) {
+    updateIcon.updateLoading(true);
     this.queue.push(music).subscribe({
       next: () => {
-        // TODO change icon to checkmark
+        updateIcon.updateIcon(faCheck);
+        updateIcon.updateLoading(false);
+        updateIcon.completeEmitter();
       },
       error: (error) => {
+        updateIcon.updateLoading(false);
+        updateIcon.updateIcon(faCross);
         if (error?.error?.cause === 'queue') {
           this.error = SearchComponent.ALREADY_IN_QUEUE;
-        } else {
-          this.error = SearchComponent.ERROR_MESSAGE;
-        }
-        if (error?.error?.cause === 'queue-limit') {
+        } else if (error?.error?.cause === 'queue-limit') {
           const queueLimit = error?.error?.limit;
           this.error = `Vous avez déjà ${
             queueLimit || 'plusieurs'
           } musiques dans la file d'attente. Veuillez attendre qu'elle soient terminées ou les supprimer pour en ajouter d'autres.`;
+        } else {
+          this.error = SearchComponent.ERROR_MESSAGE;
         }
-        setTimeout(() => (this.error = ''), 5000);
+
+        setTimeout(() => {
+          this.error = '';
+          updateIcon.updateIcon(faAdd);
+        }, 5000);
       },
     });
   }
 
-  addToBacklog(music: Music) {
-    this.queue.pushBacklog(music).subscribe();
+  addToBacklog(music: Music, updateIcon: IconUpdateStatus) {
+    updateIcon.updateLoading(true);
+    this.queue.pushBacklog(music).subscribe({
+      next: () => {
+        updateIcon.updateIcon(faCheck);
+        updateIcon.updateLoading(false);
+        updateIcon.completeEmitter();
+      },
+      error: (error) => {
+        updateIcon.updateLoading(false);
+        updateIcon.updateIcon(faCross);
+        if (error?.error?.cause === 'backlog') {
+          this.error = SearchComponent.ALREADY_IN_BACKLOG;
+        } else {
+          this.error = SearchComponent.ERROR_MESSAGE;
+        }
+        setTimeout(() => {
+          this.error = '';
+          updateIcon.updateIcon(faAdd);
+        }, 5000);
+      },
+    });
   }
 }

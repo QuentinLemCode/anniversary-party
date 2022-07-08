@@ -16,8 +16,8 @@
     [music]="queue.music"
     [username]="queue.user.name"
     [config]="musicConfig"
-    (delete)="delete(queue.id)"
-    (vote)="vote(queue.id)"
+    (delete)="delete(queue.id, $event)"
+    (vote)="vote(queue.id, $event)"
     [voteCount]="queue.forward_votes"
   ></app-music>
   <app-music
