@@ -6,6 +6,9 @@
     <div class="title">{{ music.title }}</div>
     <div class="artist">{{ music.artist }}</div>
     <div *ngIf="username" class="adder">Ajouté par {{ username }}</div>
+    <div *ngIf="backlog" class="adder">
+      Musique selectionné sur le formulaire
+    </div>
   </div>
   <div class="vote" *ngIf="config?.votable">
     <button (click)="vote.emit()">

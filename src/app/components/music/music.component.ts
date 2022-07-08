@@ -42,6 +42,9 @@ export class MusicComponent implements OnInit {
   @Input()
   config?: MusicComponentConfiguration;
 
+  @Input()
+  backlog = false;
+
   @Output()
   vote = new EventEmitter<void>();
 

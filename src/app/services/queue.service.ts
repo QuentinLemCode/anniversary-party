@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ReplaySubject, Subscription, timer } from 'rxjs';
 import { first, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-import { Backlog, Music, Queue } from './music-api.interface';
+import { Backlog, Music, Queue, QueueResponse } from './music-api.interface';
 import { VisibilityService } from './visibility.service';
 
 @Injectable({
@@ -13,6 +13,7 @@ export class QueueService {
   private readonly endpoint = environment.serverUrl + 'queue';
 
   private readonly $queue = new ReplaySubject<Queue[]>(1);
+  private readonly $backlog = new ReplaySubject<Backlog | null>(1);
 
   private $polling?: Subscription;
 
@@ -44,6 +45,10 @@ export class QueueService {
   }
 
   getBacklog() {
+    return this.$backlog.asObservable();
+  }
+
+  getFullBacklog() {
     return this.http.get<Backlog[]>(this.endpoint + '/backlog');
   }
 
@@ -90,12 +95,14 @@ export class QueueService {
   }
 
   private loadQueue() {
-    this.http.get<Queue[]>(this.endpoint).subscribe({
-      next: (queues) => {
-        this.$queue.next(queues);
+    this.http.get<QueueResponse>(this.endpoint).subscribe({
+      next: (response) => {
+        this.$queue.next(response.queue);
+        this.$backlog.next(response.backlog);
       },
       error: (err) => {
         this.$queue.error(err);
+        this.$backlog.error(err);
       },
     });
   }

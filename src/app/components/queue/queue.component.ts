@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { takeUntil, tap } from 'rxjs/operators';
-import { Queue } from '../../services/music-api.interface';
+import { Backlog, Queue, Status } from '../../services/music-api.interface';
 import { MusicApiService } from '../../services/music-api.service';
 import { QueueService } from '../../services/queue.service';
 import { UserService } from '../../services/user.service';
@@ -14,6 +14,8 @@ import { MusicComponentConfiguration } from '../music/music.component';
 })
 export class QueueComponent extends UnsubscribableComponent implements OnInit {
   queues: Queue[] | null = null;
+  playing: Queue | null = null;
+  backlog: Backlog | null = null;
   loading = true;
   error = '';
 
@@ -41,13 +43,25 @@ export class QueueComponent extends UnsubscribableComponent implements OnInit {
       )
       .subscribe({
         next: (queue) => {
-          this.queues = queue;
+          this.loadQueue(queue);
           this.loading = false;
         },
         error: (error) => {
           console.error(error);
           this.loading = false;
           this.error = "Erreur lors de l'obtention de la file d'attente";
+        },
+      });
+
+    this.queue
+      .getBacklog()
+      .pipe(
+        takeUntil(this.$destroy),
+        tap(() => (this.error = ''))
+      )
+      .subscribe({
+        next: (backlog) => {
+          this.backlog = backlog;
         },
       });
 
@@ -79,5 +93,13 @@ export class QueueComponent extends UnsubscribableComponent implements OnInit {
         }
       },
     });
+  }
+
+  private loadQueue(queues: Queue[]) {
+    const indexPlaying = queues.findIndex((q) => q.status === Status.PLAYING);
+    if (indexPlaying !== -1) {
+      [this.playing] = queues.splice(indexPlaying, 1);
+    }
+    this.queues = queues;
   }
 }

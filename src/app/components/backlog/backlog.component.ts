@@ -31,7 +31,7 @@ export class BacklogComponent
 
   ngOnInit(): void {
     this.queue
-      .getBacklog()
+      .getFullBacklog()
       .pipe(
         takeUntil(this.$destroy),
         tap(() => (this.error = ''))
@@ -52,7 +52,7 @@ export class BacklogComponent
   delete(id: number) {
     this.queue
       .deleteBacklog(id)
-      .pipe(mergeMap(() => this.queue.getBacklog()))
+      .pipe(mergeMap(() => this.queue.getFullBacklog()))
       .subscribe({
         next: (queue) => {
           this.backlog = queue;

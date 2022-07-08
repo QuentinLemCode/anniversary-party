@@ -59,6 +59,11 @@ export interface Queue {
   forward_votes: number;
 }
 
+export interface QueueResponse {
+  queue: Queue[];
+  backlog: Backlog | null;
+}
+
 export interface Backlog {
   music: Music;
   id: number;
