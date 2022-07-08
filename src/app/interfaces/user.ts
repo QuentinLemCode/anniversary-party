@@ -4,7 +4,6 @@ export interface User {
 }
 
 export interface FullUser {
-  deleted_at?: any;
   id: number;
   name: string;
   ip: string;
