@@ -69,7 +69,6 @@ export class MusicComponent implements OnInit {
         backlog: false,
       };
     }
-    this.addToQueue.complete();
   }
   @Input()
   username?: string;
