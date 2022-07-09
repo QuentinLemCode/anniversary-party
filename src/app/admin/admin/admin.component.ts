@@ -55,7 +55,7 @@ export class AdminComponent implements OnInit {
       });
   }
 
-  disableIPVerificationForUser(id: number) {
+  toggleIPVerification(id: number) {
     this.users
       .toggleIPVerification(id)
       .pipe(mergeMap(() => this.users.getAllUsers()))

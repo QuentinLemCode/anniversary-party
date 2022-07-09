@@ -29,6 +29,7 @@
         <ng-container *ngIf="user.role !== 1">
           <button (click)="deleteUser(user.id)">Delete</button>
           <button (click)="unlockUser(user.id)">Unlock</button>
+          <button (click)="toggleIPVerification(user.id)">Toggle IP</button>
         </ng-container>
       </td>
     </tr>
