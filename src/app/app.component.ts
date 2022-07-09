@@ -17,11 +17,7 @@ export class AppComponent {
   faGithub = faGithubSquare;
   faLinkedIn = faLinkedin;
 
-  constructor(private user: UserService, private router: Router) {
-    if (this.user.isLoggedIn === false) {
-      this.router.navigate(['login']);
-    }
-  }
+  constructor(private user: UserService, private router: Router) {}
 
   get isLoggedIn() {
     return this.user.isLoggedIn;

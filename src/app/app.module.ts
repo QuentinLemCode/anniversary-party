@@ -19,6 +19,7 @@ import { JwtInterceptor } from './shared/jwt.interceptor';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { AdminComponent } from './admin/admin/admin.component';
 import { BacklogComponent } from './components/backlog/backlog.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { BacklogComponent } from './components/backlog/backlog.component';
     SearchComponent,
     AdminComponent,
     BacklogComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
