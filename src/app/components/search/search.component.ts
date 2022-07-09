@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {
   faAdd,
   faCheck,
-  faCross,
   faSearch,
+  faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import { of } from 'rxjs';
 import {
@@ -34,6 +34,7 @@ import {
 export class SearchComponent extends UnsubscribableComponent implements OnInit {
   search = new FormControl<string>('');
   results: Music[] | null = null;
+  hideResults = false;
   loading = false;
   error = '';
   musicConfig: MusicComponentConfiguration = {
@@ -47,6 +48,11 @@ export class SearchComponent extends UnsubscribableComponent implements OnInit {
   static readonly ALREADY_IN_QUEUE =
     "Cette musique est déjà dans la file d'attente";
   static readonly ALREADY_IN_BACKLOG = 'Cette musique est déjà dans le backlog';
+
+  @HostListener('window:popstate', ['$event'])
+  onPopState() {
+    this.hideResults = true;
+  }
 
   constructor(
     private readonly music: MusicApiService,
@@ -64,8 +70,8 @@ export class SearchComponent extends UnsubscribableComponent implements OnInit {
           (query): query is string => typeof query === 'string'
         ),
         distinctUntilChanged(),
-        debounceTime(500),
         tap(() => (this.loading = true)),
+        debounceTime(500),
         mergeMap((query) => {
           if (query === '') {
             return of(null);
@@ -93,6 +99,10 @@ export class SearchComponent extends UnsubscribableComponent implements OnInit {
       });
   }
 
+  showResults() {
+    this.hideResults = false;
+  }
+
   addToQueue(music: Music, updateIcon: IconUpdateStatus) {
     updateIcon.updateLoading(true);
     this.queue.push(music).subscribe({
@@ -103,7 +113,7 @@ export class SearchComponent extends UnsubscribableComponent implements OnInit {
       },
       error: (error) => {
         updateIcon.updateLoading(false);
-        updateIcon.updateIcon(faCross);
+        updateIcon.updateIcon(faXmark);
         if (error?.error?.cause === 'queue') {
           this.error = SearchComponent.ALREADY_IN_QUEUE;
         } else if (error?.error?.cause === 'queue-limit') {
@@ -133,7 +143,7 @@ export class SearchComponent extends UnsubscribableComponent implements OnInit {
       },
       error: (error) => {
         updateIcon.updateLoading(false);
-        updateIcon.updateIcon(faCross);
+        updateIcon.updateIcon(faXmark);
         if (error?.error?.cause === 'backlog') {
           this.error = SearchComponent.ALREADY_IN_BACKLOG;
         } else {

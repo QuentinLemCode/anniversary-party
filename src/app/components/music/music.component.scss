@@ -39,7 +39,7 @@
     }
   }
   .adder {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 300;
   }
 
@@ -49,6 +49,8 @@
 
   button {
     padding: 15px 20px;
+    flex-direction: column;
+    align-items: center;
   }
 
   fa-icon {
