@@ -15,7 +15,7 @@
     *ngFor="let queue of queues"
     [music]="queue.music"
     [username]="queue.user.name"
-    [config]="musicConfig"
+    [config]="getMusicConfig(queue)"
     (delete)="delete(queue.id, $event)"
     (vote)="vote(queue.id, $event)"
     [voteCount]="queue.forward_votes"

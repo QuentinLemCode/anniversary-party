@@ -55,6 +55,7 @@ export interface Queue {
   music: Music;
   user: {
     name: string;
+    id: number;
   };
   forward_votes: number;
 }

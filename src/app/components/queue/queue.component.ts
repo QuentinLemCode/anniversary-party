@@ -21,6 +21,7 @@ export class QueueComponent extends UnsubscribableComponent implements OnInit {
   backlog: Backlog | null = null;
   loading = true;
   error = '';
+  isEngineStarted = false;
 
   musicConfig: MusicComponentConfiguration = {
     votable: false,
@@ -28,6 +29,17 @@ export class QueueComponent extends UnsubscribableComponent implements OnInit {
     queueable: false,
     backlog: false,
   };
+
+  getMusicConfig(queue: Queue) {
+    const isQueuedByUser =
+      this.user.isLoggedIn && queue.user.id === +(this.user.userId ?? 0);
+    return {
+      votable: this.isEngineStarted && this.user.isLoggedIn,
+      deletable: isQueuedByUser || this.user.isAdmin(),
+      queueable: false,
+      backlog: false,
+    };
+  }
 
   constructor(
     private readonly queue: QueueService,
@@ -73,12 +85,7 @@ export class QueueComponent extends UnsubscribableComponent implements OnInit {
       .pipe(takeUntil(this.$destroy))
       .subscribe({
         next: (status) => {
-          this.musicConfig = {
-            votable: status.engineStarted && this.user.isLoggedIn,
-            deletable: this.user.isAdmin(),
-            queueable: false,
-            backlog: false,
-          };
+          this.isEngineStarted = status.engineStarted;
         },
       });
   }
