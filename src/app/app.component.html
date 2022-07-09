@@ -32,7 +32,7 @@
     Un très grand merci à Théo Charlot pour le design ✏️
     <br />
     <ng-container *ngIf="isLoggedIn"
-      >Connecté en tant que {{ username }}</ng-container
+      >Connecté en tant que {{ username | titlecase }}</ng-container
     >
     <br />
     <a *ngIf="isLoggedIn" [routerLink]="" (click)="logout()">Se déconnecter</a>
