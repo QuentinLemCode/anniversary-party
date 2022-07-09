@@ -55,6 +55,17 @@ export class AdminComponent implements OnInit {
       });
   }
 
+  disableIPVerificationForUser(id: number) {
+    this.users
+      .toggleIPVerification(id)
+      .pipe(mergeMap(() => this.users.getAllUsers()))
+      .subscribe({
+        next: (users) => {
+          this.usersList = users;
+        },
+      });
+  }
+
   setMaxVotes(value: number) {
     this.settings.setMaxVote(value).subscribe({
       next: (vote) => {

@@ -25,7 +25,7 @@
       <th>{{ user.locked }}</th>
       <th>{{ user.created_at }}</th>
       <th>{{ user.updated_at }}</th>
-      <td>
+      <td class="actions">
         <ng-container *ngIf="user.role !== 1">
           <button (click)="deleteUser(user.id)">Delete</button>
           <button (click)="unlockUser(user.id)">Unlock</button>

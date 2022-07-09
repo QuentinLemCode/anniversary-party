@@ -88,6 +88,13 @@ export class UserService {
     return this.http.delete(this.userEndpoint + '/' + id);
   }
 
+  toggleIPVerification(id: number) {
+    return this.http.post(
+      this.userEndpoint + '/' + id + '/toggle-ip-verification',
+      {}
+    );
+  }
+
   refreshToken() {
     const body = {
       token: this.savedRefreshToken,
