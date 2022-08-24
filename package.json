@@ -25,6 +25,7 @@
     "@fortawesome/free-brands-svg-icons": "^6.1.1",
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "qrcode": "^1.5.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
@@ -40,6 +41,7 @@
     "@angular/compiler-cli": "^14.0.5",
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.11.1",
+    "@types/qrcode": "^1.5.0",
     "@typescript-eslint/eslint-plugin": "^5.29.0",
     "@typescript-eslint/parser": "^5.29.0",
     "eslint": "^8.18.0",
